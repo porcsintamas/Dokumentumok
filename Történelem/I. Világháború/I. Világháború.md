@@ -212,7 +212,7 @@ ___________________________________________________________
 
 **Oka:**  
 - **Az USA érdekelt lett a háború befejezésében,**  
-- **mert az antant számára szállított utánpótlást** ***==hitelért!==*** **➔**  
+- **mert az antant számára szállított utánpótlást** ***<mark>hitelért!</mark>*** **➔**  
 - **➔ Az antant államai** ***komoly adósságot*** **halmoztak fel, vereség esetén ez odaveszett volna**  
 
 ---
