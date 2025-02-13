@@ -8,7 +8,7 @@
 - Marne-folyó: Franciaország északi részén  
 - **Moltke vezetésével a németek bevonultak Belgiumba, hogy megtámadják a franciákat**  
 - **Marne-folyónál felsorakoznak:**  
-  - **Német sereg ↔ Antant (francia + angol seregek)**  
+  - **Német sereg vs. Antant (francia + angol seregek)**  
 
 ---
 
@@ -35,7 +35,7 @@
 
 ## Hadi események – keleti front (Európa keleti fele – lengyel, orosz területek)  
 - **Erre a frontra is felvonultak a németek**  
-- **Németek ↔ Oroszok**
+- **Németek vs. Oroszok**
 
 **Csatáik:**  
 - **Tannenberg, Mazuri tavak → orosz vereség**    
