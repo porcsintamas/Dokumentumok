@@ -39,7 +39,7 @@ A 19-20. században a gyarmatosítás új formája jelent meg:
 - 1913: II. Balkán-háború - a szövetségesek Bulgária ellen fordulnak
 
 ### A háború kitörése
-- 1914. június 28. - Szarajevói merénylet: Gavrilo Princip, a "Fekete Kéz" (Egyesülés és Halál) szerb terrorszervezet tagja meggyilkolja Ferenc Ferdinánd trónörököst és feleségét
+- **1914. június 28.** - Szarajevói merénylet: Gavrilo Princip, a "Fekete Kéz" (Egyesülés és Halál) szerb terrorszervezet tagja meggyilkolja Ferenc Ferdinánd trónörököst és feleségét
 
 Ez a merénylet szolgált **casus belli**-ként (háborús okként), amely végül kirobbantotta az I. világháborút.
 
