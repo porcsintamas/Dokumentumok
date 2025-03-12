@@ -175,6 +175,8 @@ Switch(config-if)# switchport trunk allowed vlan [szám],[szám]
 Switch# show interface trunk
 ```
 
+----------------------------------
+
 ### Router-on-a-Stick Inter-VLAN Routing beállítása
 
 #### Alinterfész létrehozása
