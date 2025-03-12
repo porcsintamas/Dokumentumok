@@ -131,6 +131,8 @@ Router# copy running-config startup-config
 ```
 
 _______________________________________________
+_______________________________________________
+_______________________________________________
 
 ## További parancsok (11. osztály)
 
@@ -209,6 +211,12 @@ Switch(config)# spanning-tree vlan [szám] root primary
 
 ```
 Switch(config)# spanning-tree vlan [szám] priority [szám]
+```
+
+#### Ellenőrzés
+
+```
+Switch# show spanning-tree
 ```
 
 ----------------------------------
