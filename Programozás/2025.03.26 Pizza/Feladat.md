@@ -272,87 +272,87 @@ SELECT pnev, par FROM ppizza WHERE par < 1000;
 -- 5. feladat:
 SELECT pfutar.fnev 
 FROM pfutar
-JOIN prendeles ON pfutar.fazon = prendeles.fazon
+INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
 WHERE prendeles.razon = 1;
 
 -- 6. feladat:
 SELECT DISTINCT pvevo.vnev
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
 WHERE prendeles.ido < 12.00;
 
 -- 7. feladat:
 SELECT DISTINCT ppizza.pnev
 FROM ppizza
-JOIN ptetel ON ppizza.pazon = ptetel.pazon
-JOIN prendeles ON ptetel.razon = prendeles.razon
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN ptetel ON ppizza.pazon = ptetel.pazon
+INNER JOIN prendeles ON ptetel.razon = prendeles.razon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 WHERE pvevo.vnev = 'Szundi';
 
 -- 8. feladat:
 SELECT DISTINCT pfutar.fnev
 FROM pfutar
-JOIN prendeles ON pfutar.fazon = prendeles.fazon
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 WHERE pvevo.vnev = 'Tudor';
 
 -- 9. feladat:
 SELECT prendeles.razon AS rendeles_azonosito, pfutar.fnev AS futar, pvevo.vnev AS vevo, prendeles.datum, prendeles.ido
 FROM prendeles
-JOIN pfutar ON prendeles.fazon = pfutar.fazon
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN pfutar ON prendeles.fazon = pfutar.fazon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 ORDER BY prendeles.razon;
 
 -- 10. feladat:
 SELECT SUM(ppizza.par * ptetel.db) AS osszeg
 FROM ppizza
-JOIN ptetel ON ppizza.pazon = ptetel.pazon
-JOIN prendeles ON ptetel.razon = prendeles.razon
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN ptetel ON ppizza.pazon = ptetel.pazon
+INNER JOIN prendeles ON ptetel.razon = prendeles.razon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 WHERE pvevo.vnev = 'Morgó';
 
 -- 11. feladat:
 SELECT COUNT(*) AS alkalmak
 FROM ptetel
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
-JOIN prendeles ON ptetel.razon = prendeles.razon
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN prendeles ON ptetel.razon = prendeles.razon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 WHERE pvevo.vnev = 'Vidor' AND ppizza.pnev = 'Sorrento';
 
 -- 12. feladat:
 SELECT SUM(ptetel.db) AS osszesen
 FROM ptetel
-JOIN prendeles ON ptetel.razon = prendeles.razon
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN prendeles ON ptetel.razon = prendeles.razon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 WHERE pvevo.vnev = 'Hapci';
 
 -- 13. feladat:
 SELECT COUNT(DISTINCT prendeles.razon) AS alkalmak
 FROM prendeles
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 WHERE pvevo.vnev = 'Szende';
 
 -- 14. feladat:
 SELECT SUM(ptetel.db) AS osszesen
 FROM ptetel
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
 WHERE ppizza.pnev = 'Hawaii';
 
 -- 15. feladat:
 SELECT pvevo.vnev, SUM(ppizza.par * ptetel.db) AS osszeg
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
 GROUP BY pvevo.vnev
 ORDER BY osszeg DESC;
 
 -- 16. feladat:
 SELECT pvevo.vnev AS vevo, ppizza.pnev AS pizza, SUM(ptetel.db) AS darab
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
 GROUP BY pvevo.vnev, ppizza.pnev
 HAVING SUM(ptetel.db) > 0
 ORDER BY pvevo.vnev, SUM(ptetel.db) DESC;
@@ -360,31 +360,31 @@ ORDER BY pvevo.vnev, SUM(ptetel.db) DESC;
 -- 17. feladat:
 SELECT pfutar.fnev AS futar, prendeles.datum, SUM(ptetel.db) AS darab
 FROM pfutar
-JOIN prendeles ON pfutar.fazon = prendeles.fazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY pfutar.fnev, prendeles.datum
 ORDER BY prendeles.datum, pfutar.fnev;
 
 -- 18. feladat:
 SELECT pvevo.vnev AS vevo, prendeles.datum, SUM(ptetel.db) AS darab
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY pvevo.vnev, prendeles.datum
 ORDER BY prendeles.datum, pvevo.vnev;
 
 -- 19. feladat:
 SELECT prendeles.datum, SUM(ppizza.par * ptetel.db) AS bevetel
 FROM prendeles
-JOIN ptetel ON prendeles.razon = ptetel.razon
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
 GROUP BY prendeles.datum
 ORDER BY prendeles.datum;
 
 -- 20. feladat:
 SELECT prendeles.datum, SUM(ptetel.db) AS darab
 FROM prendeles
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY prendeles.datum
 ORDER BY prendeles.datum;
 
@@ -393,7 +393,7 @@ SELECT AVG(napi_forgalom.napi_db) AS atlag
 FROM (
     SELECT prendeles.datum, SUM(ptetel.db) AS napi_db
     FROM prendeles
-    JOIN ptetel ON prendeles.razon = ptetel.razon
+    INNER JOIN ptetel ON prendeles.razon = ptetel.razon
     GROUP BY prendeles.datum
 ) AS napi_forgalom;
 
@@ -402,30 +402,30 @@ SELECT AVG(rendelesenkent.rendelesi_db) AS atlag
 FROM (
     SELECT prendeles.razon, SUM(ptetel.db) AS rendelesi_db
     FROM prendeles
-    JOIN ptetel ON prendeles.razon = ptetel.razon
+    INNER JOIN ptetel ON prendeles.razon = ptetel.razon
     GROUP BY prendeles.razon
 ) AS rendelesenkent;
 
 -- 23. feladat:
 SELECT pfutar.fnev, COUNT(prendeles.razon) AS kiszallitasok
 FROM pfutar
-JOIN prendeles ON pfutar.fazon = prendeles.fazon
+INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
 GROUP BY pfutar.fnev
 ORDER BY kiszallitasok DESC;
 
 -- 24. feladat:
 SELECT ppizza.pnev, SUM(ptetel.db) AS darab
 FROM ppizza
-JOIN ptetel ON ppizza.pazon = ptetel.pazon
+INNER JOIN ptetel ON ppizza.pazon = ptetel.pazon
 GROUP BY ppizza.pnev
 ORDER BY darab DESC;
 
 -- 25. feladat:
 SELECT pvevo.vnev, SUM(ppizza.par * ptetel.db) AS osszeg
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
 GROUP BY pvevo.vnev
 ORDER BY osszeg DESC;
 
@@ -437,8 +437,8 @@ WHERE par = (SELECT MAX(par) FROM ppizza);
 -- 27. feladat:
 SELECT pfutar.fnev, SUM(ptetel.db) AS osszesen
 FROM pfutar
-JOIN prendeles ON pfutar.fazon = prendeles.fazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY pfutar.fnev
 ORDER BY osszesen DESC
 LIMIT 1;
@@ -446,8 +446,8 @@ LIMIT 1;
 -- 28. feladat:
 SELECT pvevo.vnev, SUM(ptetel.db) AS osszesen
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY pvevo.vnev
 ORDER BY osszesen DESC
 LIMIT 1;
@@ -455,7 +455,7 @@ LIMIT 1;
 -- 29. feladat:
 SELECT prendeles.datum, SUM(ptetel.db) AS darab
 FROM prendeles
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY prendeles.datum
 ORDER BY darab DESC
 LIMIT 1;
@@ -463,8 +463,8 @@ LIMIT 1;
 -- 30. feladat:
 SELECT prendeles.datum, SUM(ptetel.db) AS darab
 FROM prendeles
-JOIN ptetel ON prendeles.razon = ptetel.razon
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
 WHERE ppizza.pnev = 'Hawaii'
 GROUP BY prendeles.datum
 ORDER BY darab DESC
@@ -473,11 +473,11 @@ LIMIT 1;
 -- 31. feladat:
 SELECT SUM(ptetel.db) AS darab
 FROM prendeles
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 WHERE prendeles.datum = (
     SELECT prendeles.datum 
     FROM prendeles
-    JOIN ptetel ON prendeles.razon = ptetel.razon
+    INNER JOIN ptetel ON prendeles.razon = ptetel.razon
     GROUP BY prendeles.datum
     ORDER BY SUM(ptetel.db) DESC 
     LIMIT 1
@@ -486,13 +486,13 @@ WHERE prendeles.datum = (
 -- 32. feladat:
 SELECT SUM(ppizza.par * ptetel.db) AS bevetel
 FROM prendeles
-JOIN ptetel ON prendeles.razon = ptetel.razon
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
 WHERE prendeles.datum = (
     SELECT prendeles.datum
     FROM prendeles
-    JOIN ptetel ON prendeles.razon = ptetel.razon
-    JOIN ppizza ON ptetel.pazon = ppizza.pazon
+    INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+    INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
     GROUP BY prendeles.datum
     ORDER BY SUM(ppizza.par * ptetel.db) DESC
     LIMIT 1
@@ -501,9 +501,9 @@ WHERE prendeles.datum = (
 -- 33. feladat:
 SELECT ppizza.pnev
 FROM ptetel
-JOIN ppizza ON ptetel.pazon = ppizza.pazon
-JOIN prendeles ON ptetel.razon = prendeles.razon
-JOIN pvevo ON prendeles.vazon = pvevo.vazon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
+INNER JOIN prendeles ON ptetel.razon = prendeles.razon
+INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
 WHERE pvevo.vnev = 'Szundi'
 GROUP BY ppizza.pnev
 ORDER BY SUM(ptetel.db) DESC
@@ -512,7 +512,7 @@ LIMIT 1;
 -- 34. feladat:
 SELECT DISTINCT pvevo.vnev
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
 WHERE prendeles.datum = '2010-10-01';
 
 -- 35. feladat:
@@ -534,7 +534,7 @@ LIMIT 1;
 -- 38. feladat:
 SELECT pfutar.fnev
 FROM pfutar
-JOIN prendeles ON pfutar.fazon = prendeles.fazon
+INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
 GROUP BY pfutar.fnev
 HAVING COUNT(*) > (
     SELECT AVG(szamlalo) 
@@ -548,15 +548,15 @@ HAVING COUNT(*) > (
 -- 39. feladat:
 SELECT pvevo.vnev
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY pvevo.vnev
 HAVING SUM(ptetel.db) >= 3 * (
     SELECT AVG(db) 
     FROM (
         SELECT SUM(ptetel.db) AS db
         FROM ptetel
-        JOIN prendeles ON ptetel.razon = prendeles.razon
+        INNER JOIN prendeles ON ptetel.razon = prendeles.razon
         GROUP BY prendeles.vazon
     ) AS atlag
 );
@@ -564,14 +564,14 @@ HAVING SUM(ptetel.db) >= 3 * (
 -- 40. feladat:
 SELECT pfutar.fnev
 FROM pfutar
-JOIN prendeles ON pfutar.fazon = prendeles.fazon
+INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
 GROUP BY pfutar.fnev
 HAVING COUNT(*) >= 10;
 
 -- 41. feladat:
 SELECT ppizza.pnev
 FROM ppizza
-JOIN ptetel ON ppizza.pazon = ptetel.pazon
+INNER JOIN ptetel ON ppizza.pazon = ptetel.pazon
 GROUP BY ppizza.pnev
 HAVING SUM(ptetel.db) >= 50;
 
@@ -593,8 +593,8 @@ FROM ppizza
 WHERE ppizza.pazon NOT IN (
     SELECT DISTINCT ptetel.pazon
     FROM ptetel
-    JOIN prendeles ON ptetel.razon = prendeles.razon
-    JOIN pvevo ON prendeles.vazon = pvevo.vazon
+    INNER JOIN prendeles ON ptetel.razon = prendeles.razon
+    INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
     WHERE pvevo.vnev = 'Columbo'
 );
 
@@ -611,9 +611,9 @@ FROM pvevo
 WHERE pvevo.vnev NOT IN (
     SELECT DISTINCT pvevo.vnev
     FROM pvevo
-    JOIN prendeles ON pvevo.vazon = prendeles.vazon
-    JOIN ptetel ON prendeles.razon = ptetel.razon
-    JOIN ppizza ON ptetel.pazon = ppizza.pazon
+    INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+    INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+    INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
     WHERE ppizza.pnev = 'Vigyori'
 );
 
@@ -639,12 +639,13 @@ SELECT NULL AS eredmeny LIMIT 0;
 -- 50. feladat:
 SELECT pvevo.vnev
 FROM pvevo
-JOIN prendeles ON pvevo.vazon = prendeles.vazon
-JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
 GROUP BY pvevo.vnev, ptetel.pazon
 HAVING SUM(ptetel.db) >= 10
 GROUP BY pvevo.vnev
 HAVING COUNT(DISTINCT ptetel.pazon) >= 2;
+
 ```
 
 **Megjegyzések:**
