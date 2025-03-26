@@ -4,17 +4,16 @@
 
 Az alábbi táblázat mutatja, hogy a dokumentumban felsorolt mezők (oszlopok) hogyan csoportosulnak a különböző táblákban. (Ez eredetileg elcsúszott formátumú volt, most egységesen szerkesztve látható.)
 
-```
-+-------+-----------+-----------+-----------+-----------+
-| Tetel | Pizza     | Futar     | Vevo      | Rendeles |
-+-------+-----------+-----------+-----------+-----------+
-| Razon | Pazon     | Fazon     | Vazon     | Razon    |
-| Pazon | Pnev      | Fnev      | Vnev      | Vazon    |
-| Par   | Par       | Ftel      | Vcim      | Fazon    |
-| Db    |           |           |           | Datum    |
-|       |           |           |           | Ido      |
-+-------+-----------+-----------+-----------+-----------+
-```
+
+| Tetel | Pizza     | Futar     | Vevo      | Rendeles  |
+|-------|-----------|-----------|-----------|-----------|
+| Razon | Pazon     | Fazon     | Vazon     | Razon     |
+| Pazon | Pnev      | Fnev      | Vnev      | Vazon     |
+| Par   | Par       | Ftel      | Vcim      | Fazon     |
+| Db    |           |           |           | Datum     |
+|       |           |           |           | Ido       |
+
+
 
 *(A fenti ábra csupán szemlélteti, hogy melyik mező melyik táblához tartozik. A részletes leírás és a pontos CREATE TABLE parancsok alább következnek.)*
 
@@ -40,7 +39,7 @@ Az alábbi táblázat mutatja, hogy a dokumentumban felsorolt mezők (oszlopok) 
 
 ### Tábla szerkezet: `pfutar`
 
-```
+```sql
 CREATE TABLE `pfutar` (
   `fazon` int(3) NOT NULL default '0',
   `fnev` varchar(25) collate latin2_hungarian_ci NOT NULL default '',
@@ -51,7 +50,7 @@ CREATE TABLE `pfutar` (
 
 **Tábla adatok: `pfutar`**
 
-```
+```sql
 INSERT INTO `pfutar` VALUES (1, 'Hurrikán', '123456');
 INSERT INTO `pfutar` VALUES (2, 'Gyalogkakukk', '666666');
 INSERT INTO `pfutar` VALUES (3, 'Gömbvillám', '888888');
@@ -63,7 +62,7 @@ INSERT INTO `pfutar` VALUES (5, 'Imperial', '987654');
 
 ### Tábla szerkezet: `ppizza`
 
-```
+```sql
 CREATE TABLE `ppizza` (
   `pazon` int(3) NOT NULL default '0',
   `pnev` varchar(15) collate latin2_hungarian_ci NOT NULL default '',
@@ -74,7 +73,7 @@ CREATE TABLE `ppizza` (
 
 **Tábla adatok: `ppizza`**
 
-```
+```sql
 INSERT INTO `ppizza` VALUES (1, 'Capricciosa', 900);
 INSERT INTO `ppizza` VALUES (2, 'Frutti di Mare', 1100);
 INSERT INTO `ppizza` VALUES (3, 'Hawaii', 780);
@@ -86,7 +85,7 @@ INSERT INTO `ppizza` VALUES (5, 'Sorrento', 990);
 
 ### Tábla szerkezet: `prendeles`
 
-```
+```sql
 CREATE TABLE `prendeles` (
   `razon` int(8) NOT NULL default '0',
   `vazon` int(6) NOT NULL default '0',
@@ -99,7 +98,7 @@ CREATE TABLE `prendeles` (
 
 **Tábla adatok: `prendeles`**
 
-```
+```sql
 INSERT INTO `prendeles` VALUES ( 1, 4, 2, '2010-10-01', 13.15);
 INSERT INTO `prendeles` VALUES ( 2, 7, 2, '2010-10-01', 14.17);
 INSERT INTO `prendeles` VALUES ( 3, 1, 1, '2010-10-02', 11.07);
@@ -127,7 +126,7 @@ INSERT INTO `prendeles` VALUES (21, 5, 3, '2010-10-08', 14.29);
 
 ### Tábla szerkezet: `ptetel`
 
-```
+```sql
 CREATE TABLE `ptetel` (
   `razon` int(8) NOT NULL default '0',
   `pazon` int(3) NOT NULL default '0',
@@ -137,7 +136,7 @@ CREATE TABLE `ptetel` (
 
 **Tábla adatok: `ptetel`**
 
-```
+```sql
 INSERT INTO `ptetel` VALUES ( 1, 1, 2);
 INSERT INTO `ptetel` VALUES ( 1, 4, 3);
 INSERT INTO `ptetel` VALUES ( 2, 2, 1);
@@ -181,7 +180,7 @@ INSERT INTO `ptetel` VALUES (21, 4, 1);
 
 ### Tábla szerkezet: `pvevo`
 
-```
+```sql
 CREATE TABLE `pvevo` (
   `vazon` int(6) NOT NULL default '0',
   `vnev` varchar(30) collate latin2_hungarian_ci NOT NULL default '',
@@ -192,7 +191,7 @@ CREATE TABLE `pvevo` (
 
 **Tábla adatok: `pvevo`**
 
-```
+```sql
 INSERT INTO `pvevo` VALUES (1, 'Hapci', 'Debrecen');
 INSERT INTO `pvevo` VALUES (2, 'Vidor', 'Ebes');
 INSERT INTO `pvevo` VALUES (3, 'Tudor', ' Debrecen ');
