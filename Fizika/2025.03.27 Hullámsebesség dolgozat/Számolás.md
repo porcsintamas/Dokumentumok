@@ -60,8 +60,8 @@
 - sin β = (c<sub>levegő</sub>/c<sub>víz</sub>) · sin α  
 
 2. Törésmutatók:  
-- n<sub>víz→levegő</sub> = c<sub>víz</sub>/c<sub>levegő</sub>
-- n<sub>levegő→víz</sub> = c<sub>levegő</sub>/c<sub>víz</sub>  
+- n<sub>levegő,víz</sub> = c<sub>víz</sub>/c<sub>levegő</sub>
+- n<sub>víz,levegő</sub> = c<sub>levegő</sub>/c<sub>víz</sub>  
 
 3. Határszög:  
 - sin α<sub>határ</sub> = c<sub>levegő</sub>/c<sub>víz</sub>  
@@ -72,8 +72,8 @@
 - β = sin<sup>-1</sup>(0,13) ≈ 7,47°  
 
 2. 
-- n<sub>víz→levegő</sub> = 1500/340 ≈ 4,41
-- n<sub>levegő→víz</sub> ≈ 0,23  
+- n<sub>levegő,víz</sub> = 1500/340 ≈ 4,41
+- n<sub>víz,levegő</sub> ≈ 0,23  
 
 3. 
 - α<sub>határ</sub> = sin<sup>-1</sup>(0,227) ≈ 13,1°  
@@ -129,8 +129,8 @@
 - sin β = (c<sub>levegő</sub>/c<sub>víz</sub>) · sin α  
 
 2. Törésmutatók:  
-- n<sub>víz→levegő</sub> = c<sub>víz</sub>/c<sub>levegő</sub>
-- n<sub>levegő→víz</sub> = c<sub>levegő</sub>/c<sub>víz</sub>  
+- n<sub>levegő,víz</sub> = c<sub>víz</sub>/c<sub>levegő</sub>
+- n<sub>víz,levegő</sub> = c<sub>levegő</sub>/c<sub>víz</sub>  
 
 3. Határszög:  
 - sin α<sub>határ</sub> = c<sub>levegő</sub>/c<sub>víz</sub>  
@@ -141,8 +141,8 @@
 - β = sin<sup>-1</sup>(0,136) ≈ 7,82°  
 
 2. 
-- n<sub>víz→levegő</sub> ≈ 4,41
-- n<sub>levegő→víz</sub> ≈ 0,227  
+- n<sub>levegő,víz</sub> ≈ 4,41
+- n<sub>víz,levegő</sub> ≈ 0,227  
 
 3. 
 - α<sub>határ</sub> = sin<sup>-1</sup>(0,227) ≈ 13,1°  
