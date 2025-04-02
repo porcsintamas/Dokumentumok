@@ -89,16 +89,6 @@ Router(config-if)# ipv6 address [link-local cím] link-local
 Router(config-if)# no shutdown
 ```
 
-### DHCP kiszolgáló (pool) létrehozása, DNS cím és címek kizárása
-```
-Router(config)# ip dhcp pool [pool név]
-Router(dhcp-config)# network [hálózat] [alhálózati maszk]
-Router(dhcp-config)# dns-server [DNS cím]
-Router(dhcp-config)# default-router [alapértelmezett router]
-Router(dhcp-config)# exit
-Router(config)# ip dhcp excluded-address [kezdőcím] [végcím]
-```
-
 ### Tartománynév beállítása
 ```
 Router(config)# ip domain-name [tartománynév]
@@ -307,3 +297,42 @@ Router# show ip dhcp pool
 ```
 
 ----------------------------------
+
+### Router: Virtuális HSRP (Hot Standby Router Protocol) Router beállítása
+
+#### HSRP verzió beállítása
+
+```
+Router(config)# interface [interfész]
+Router(config-if)# standby version 2
+```
+
+#### Virtuális IP cím beállítása
+
+```
+Router(config-if)# standby [csoportszám] ip [IP cím]
+```
+
+#### Prioritás beállítása
+
+```
+Router(config-if)# standby [csoportszám] priority [szám]
+```
+
+#### Preemption (Prioritásos szerepátvétel) engedélyezése
+
+```
+Router(config-if)# standby [csoportszám] preempt
+```
+
+----------------------------------
+
+### Router: RIP (Routing Information Protocol) aktiválása és hálózati címek konfigurálása
+
+```
+Router(config)# router rip
+Router(config-router)# network [hálózati cím]
+```
+
+----------------------------------
+
