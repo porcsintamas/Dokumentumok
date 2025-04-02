@@ -566,7 +566,7 @@ SELECT pfutar.fnev
 FROM pfutar
 INNER JOIN prendeles ON pfutar.fazon = prendeles.fazon
 GROUP BY pfutar.fnev
-HAVING COUNT(*) >= 10;
+HAVING COUNT(*) >= 5;
 
 -- 41. feladat:
 SELECT ppizza.pnev
