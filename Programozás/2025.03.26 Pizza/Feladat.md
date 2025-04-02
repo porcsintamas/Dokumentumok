@@ -244,11 +244,11 @@ INSERT INTO `pvevo` VALUES (7, 'Morgó', 'Ebes');
 37. Mely pizza ára van legközelebb az átlagárhoz?
 38. Mely futárok mentek többet házhoz az átlagosnál?
 39. Kik rendeltek legalább háromszor annyi pizzát, mint egy átlagos vevő?
-40. Kik szállítottak házhoz legalább tízszer?
+40. Kik szállítottak házhoz legalább ötször?
 41. Mely pizzából fogyott legalább 50 db?
 42. Mely vevők nem rendeltek legalább háromszor?
-43. Kik rendeltek legalább 5 Vigyori pizzát?
-44. Milyen pizzából nem rendelt soha Columbo?
+43. Kik rendeltek legalább 5 Sorrento pizzát?
+44. Milyen pizzából nem rendelt soha Szende?
 45. Van-e olyan pizza, amelyből soha nem rendeltek?
 46. Ki nem rendelt soha Vigyori pizzát?
 47. Mely pizzafutárokkal nem találkoztak az egyes vevők?
@@ -583,11 +583,16 @@ GROUP BY pvevo.vnev
 HAVING COUNT(DISTINCT prendeles.razon) < 3;
 
 -- 43. feladat:
-/* Vigyori pizza nem létezik az adatok között */
-SELECT NULL AS eredmeny LIMIT 0;
+SELECT pvevo.vnev
+FROM pvevo
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN ptetel ON prendeles.razon = ptetel.razon
+INNER JOIN ppizza ON ptetel.pazon = ppizza.pazon
+WHERE ppizza.pnev = 'Sorrento'
+GROUP BY pvevo.vnev
+HAVING SUM(ptetel.db) >= 5;
 
 -- 44. feladat:
-/* Columbo név nem szerepel a vevők között */
 SELECT ppizza.pnev
 FROM ppizza
 WHERE ppizza.pazon NOT IN (
@@ -595,7 +600,7 @@ WHERE ppizza.pazon NOT IN (
     FROM ptetel
     INNER JOIN prendeles ON ptetel.razon = prendeles.razon
     INNER JOIN pvevo ON prendeles.vazon = pvevo.vazon
-    WHERE pvevo.vnev = 'Columbo'
+    WHERE pvevo.vnev = 'Szende'
 );
 
 -- 45. feladat:
