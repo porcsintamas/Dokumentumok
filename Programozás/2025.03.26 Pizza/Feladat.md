@@ -578,7 +578,7 @@ HAVING SUM(ptetel.db) >= 50;
 -- 42. feladat:
 SELECT pvevo.vnev
 FROM pvevo
-LEFT JOIN prendeles ON pvevo.vazon = prendeles.vazon
+INNER JOIN prendeles ON pvevo.vazon = prendeles.vazon
 GROUP BY pvevo.vnev
 HAVING COUNT(DISTINCT prendeles.razon) < 3;
 
@@ -601,7 +601,7 @@ WHERE ppizza.pazon NOT IN (
 -- 45. feladat:
 SELECT ppizza.pnev
 FROM ppizza
-LEFT JOIN ptetel ON ppizza.pazon = ptetel.pazon
+INNER JOIN ptetel ON ppizza.pazon = ptetel.pazon
 WHERE ptetel.pazon IS NULL;
 
 -- 46. feladat:
@@ -620,7 +620,7 @@ WHERE pvevo.vnev NOT IN (
 -- 47. feladat:
 SELECT pvevo.vnev, pfutar.fnev
 FROM pvevo
-CROSS JOIN pfutar
+INNER JOIN pfutar
 WHERE NOT EXISTS (
     SELECT 1
     FROM prendeles
