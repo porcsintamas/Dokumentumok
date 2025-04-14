@@ -202,7 +202,7 @@ Router# show ip interface brief
 Switch(config)# spanning-tree vlan [szám] root primary
 ```
 
-#### BID Prioritási érték beállítása
+#### Root bridge beállítása: BID Prioritási érték beállítása (alacsonyabb számú a root bridge)
 
 ```
 Switch(config)# spanning-tree vlan [szám] priority [szám]
@@ -318,7 +318,7 @@ Router(config-if)# standby version 2
 Router(config-if)# standby [csoportszám] ip [IP cím]
 ```
 
-#### Prioritás beállítása
+#### Prioritás beállítása (magassab számú az aktív)
 
 ```
 Router(config-if)# standby [csoportszám] priority [szám]
@@ -337,6 +337,15 @@ Router(config-if)# standby [csoportszám] preempt
 ```
 Router(config)# router rip
 Router(config-router)# network [hálózati cím]
+```
+
+----------------------------------
+
+### Router: helper address beállítása (DHCP-hez)
+
+```
+Router(config)# interface [interfész]
+Router(config-if)# ip helper-address [IP cím]
 ```
 
 ----------------------------------
