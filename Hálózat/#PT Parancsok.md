@@ -134,14 +134,14 @@ Switch(config)# vlan [szám]
 Switch(config-vlan)# name [név]
 ```
 
-### Switch: Interfész hozzárendelése egy VLAN-hoz
+### Switch: Interfész hozzárendelése egy VLAN-hoz (hozzáférési portként beállítás)
 ```
 Switch(config)# interface [interfész]
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan [szám]
 ```
 
-### Switch: Több interfész hozzárendelése egy VLAN-hoz
+### Switch: Több interfész hozzárendelése egy VLAN-hoz (hozzáférési portként beállítás)
 ```
 Switch(config)# interface range [interfész]/[1. interfész szám]-[utolsó interfész szám]
 Switch(config-if-range)# switchport mode access
@@ -160,6 +160,11 @@ Switch(config)# interface [interfész]
 Switch(config-if)# switchport mode trunk
 Switch(config-if)# switchport nonegotiate
 Switch(config-if)# switchport trunk allowed vlan [szám],[szám]
+```
+
+#### Natív VLAN beállítása
+```
+Switch(config-if)# switchport trunk native vlan [szám]
 ```
 
 ### Switch: Trönk konfiguráció/hozzárendelés megtekintése
