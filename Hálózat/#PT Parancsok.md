@@ -361,6 +361,7 @@ Router(config)# ipv6 dhcp pool [név]
 #### Hálózati cím beállítása
 
 ```
+Router(config-dhcpv6)# prefix-delegation pool [DHCP pool neve]
 Router(config-dhcpv6)# address prefix [cím]/[hossz/prefix]
 ```
 
@@ -431,3 +432,4 @@ Router# show ipv6 dhcp pool
 ```
 
 ----------------------------------
+
