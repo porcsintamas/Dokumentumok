@@ -350,3 +350,84 @@ Router(config-if)# ip helper-address [IP cím]
 
 ----------------------------------
 
+### Router: Stateful DHCPv6 beállítása
+
+#### DHCP Pool létrehozása
+
+```
+Router(config)# ipv6 dhcp pool [név]
+```
+
+#### Hálózati cím beállítása
+
+```
+Router(config-dhcpv6)# address prefix [cím]/[hossz/prefix]
+```
+
+#### DNS szerver
+
+```
+Router(config-dhcpv6)# dns-server [cím]
+```
+
+#### Domain név
+
+```
+Router(config-dhcpv6)# domain-name [cím]
+```
+
+#### Adott interfészhez a dhcp pool hozzárendelése
+
+```
+Router(config)# interface [interfész]
+Router(config-if)# ipv6 dhcp server [dhcp-pool neve]
+Router(config-if)# ipv6 nd managed-config-flag
+```
+
+#### Ellenőrzés
+
+```
+Router# show ipv6 dhcp binding
+Router# show ipv6 dhcp interface
+Router# show ipv6 dhcp pool
+```
+
+----------------------------------
+
+### Router: Stateless DHCPv6 beállítása
+
+#### DHCP Pool létrehozása
+
+```
+Router(config)# ipv6 dhcp pool [név]
+```
+
+#### DNS szerver
+
+```
+Router(config-dhcpv6)# dns-server [cím]
+```
+
+#### Domain név
+
+```
+Router(config-dhcpv6)# domain-name [cím]
+```
+
+#### Adott interfészhez a dhcp pool hozzárendelése
+
+```
+Router(config)# interface [interfész]
+Router(config-if)# ipv6 dhcp server [dhcp-pool neve]
+Router(config-if)# ipv6 nd other-config-flag
+```
+
+#### Ellenőrzés
+
+```
+Router# show ipv6 dhcp binding
+Router# show ipv6 dhcp interface
+Router# show ipv6 dhcp pool
+```
+
+----------------------------------
