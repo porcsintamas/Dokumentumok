@@ -134,14 +134,14 @@ Switch(config)# vlan [szám]
 Switch(config-vlan)# name [név]
 ```
 
-### Switch: Interfész hozzárendelése egy VLAN-hoz
+### Switch: Interfész hozzárendelése egy VLAN-hoz (hozzáférési portként beállítás)
 ```
 Switch(config)# interface [interfész]
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan [szám]
 ```
 
-### Switch: Több interfész hozzárendelése egy VLAN-hoz
+### Switch: Több interfész hozzárendelése egy VLAN-hoz (hozzáférési portként beállítás)
 ```
 Switch(config)# interface range [interfész]/[1. interfész szám]-[utolsó interfész szám]
 Switch(config-if-range)# switchport mode access
@@ -160,6 +160,11 @@ Switch(config)# interface [interfész]
 Switch(config-if)# switchport mode trunk
 Switch(config-if)# switchport nonegotiate
 Switch(config-if)# switchport trunk allowed vlan [szám],[szám]
+```
+
+#### Natív VLAN beállítása
+```
+Switch(config-if)# switchport trunk native vlan [szám]
 ```
 
 ### Switch: Trönk konfiguráció/hozzárendelés megtekintése
@@ -197,7 +202,7 @@ Router# show ip interface brief
 Switch(config)# spanning-tree vlan [szám] root primary
 ```
 
-#### BID Prioritási érték beállítása
+#### Root bridge beállítása: BID Prioritási érték beállítása (alacsonyabb számú a root bridge)
 
 ```
 Switch(config)# spanning-tree vlan [szám] priority [szám]
@@ -313,7 +318,7 @@ Router(config-if)# standby version 2
 Router(config-if)# standby [csoportszám] ip [IP cím]
 ```
 
-#### Prioritás beállítása
+#### Prioritás beállítása (magassab számú az aktív)
 
 ```
 Router(config-if)# standby [csoportszám] priority [szám]
@@ -332,6 +337,98 @@ Router(config-if)# standby [csoportszám] preempt
 ```
 Router(config)# router rip
 Router(config-router)# network [hálózati cím]
+```
+
+----------------------------------
+
+### Router: helper address beállítása (DHCP-hez)
+
+```
+Router(config)# interface [interfész]
+Router(config-if)# ip helper-address [IP cím]
+```
+
+----------------------------------
+
+### Router: Stateful DHCPv6 beállítása
+
+#### DHCP Pool létrehozása
+
+```
+Router(config)# ipv6 dhcp pool [név]
+```
+
+#### Hálózati cím beállítása
+
+```
+Router(config-dhcpv6)# prefix-delegation pool [DHCP pool neve]
+Router(config-dhcpv6)# address prefix [cím]/[hossz/prefix]
+```
+
+#### DNS szerver
+
+```
+Router(config-dhcpv6)# dns-server [cím]
+```
+
+#### Domain név
+
+```
+Router(config-dhcpv6)# domain-name [cím]
+```
+
+#### Adott interfészhez a dhcp pool hozzárendelése
+
+```
+Router(config)# interface [interfész]
+Router(config-if)# ipv6 dhcp server [dhcp-pool neve]
+Router(config-if)# ipv6 nd managed-config-flag
+```
+
+#### Ellenőrzés
+
+```
+Router# show ipv6 dhcp binding
+Router# show ipv6 dhcp interface
+Router# show ipv6 dhcp pool
+```
+
+----------------------------------
+
+### Router: Stateless DHCPv6 beállítása
+
+#### DHCP Pool létrehozása
+
+```
+Router(config)# ipv6 dhcp pool [név]
+```
+
+#### DNS szerver
+
+```
+Router(config-dhcpv6)# dns-server [cím]
+```
+
+#### Domain név
+
+```
+Router(config-dhcpv6)# domain-name [cím]
+```
+
+#### Adott interfészhez a dhcp pool hozzárendelése
+
+```
+Router(config)# interface [interfész]
+Router(config-if)# ipv6 dhcp server [dhcp-pool neve]
+Router(config-if)# ipv6 nd other-config-flag
+```
+
+#### Ellenőrzés
+
+```
+Router# show ipv6 dhcp binding
+Router# show ipv6 dhcp interface
+Router# show ipv6 dhcp pool
 ```
 
 ----------------------------------
