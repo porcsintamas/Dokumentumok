@@ -85,6 +85,8 @@ Router(config)# ipv6 unicast-routing
 ```
 Router(config)# interface [interfész]
 Router(config-if)# ipv6 address [IPv6-cím]/[hossz]
+Router(config-if)# ipv6 address autoconfig
+Router(config-if)# ipv6 address dhcp
 Router(config-if)# ipv6 address [link-local cím] link-local
 Router(config-if)# no shutdown
 ```
@@ -432,4 +434,3 @@ Router# show ipv6 dhcp pool
 ```
 
 ----------------------------------
-
