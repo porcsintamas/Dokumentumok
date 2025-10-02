@@ -433,4 +433,111 @@ Router# show ipv6 dhcp interface
 Router# show ipv6 dhcp pool
 ```
 
-----------------------------------
+_______________________________________________
+_______________________________________________
+_______________________________________________
+
+## 12. Osztály
+
+### Támadások Elleni Védekezés
+
+#### MAC Flooding (MAC tábla túlcsordulás)
+A támadás célja, hogy a kapcsoló MAC táblájában hamis címekkel túlterhelje azt, így minden forgalmat elkezd kiáramoltatni minden portra.
+**Védekezés: Port Security**
+```plaintext
+Switch(config)# interface [állomás interfésze]
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport port-security
+Switch(config-if)# switchport port-security maximum [n]
+Switch(config-if)# switchport port-security mac-address sticky
+Switch(config-if)# switchport port-security violation [protect/restrict/shutdown]
+Switch(config-if)# switchport port-security aging time [perc]
+! Megtekintés: show port-security interface [interfész]
+```
+*Megjegyzés: Sticky és aging általában vagy-vagy; sticky esetén nincs szükség agingre, és fordítva.*
+
+#### DHCP Támadások (Pl. DHCP Starvation, DHCP Spoofing)
+- **DHCP Starvation:** Az összes elérhető címet lefoglalja, kliens DoS-t okoz.
+- **DHCP Spoofing:** Hamis DHCP szerver rossz gateway, DNS-t ad.
+**Védekezés: DHCP Snooping**
+```plaintext
+Switch(config)# ip dhcp snooping
+Switch(config)# ip dhcp snooping vlan [szám vagy tartomány]
+Switch(config)# interface [DHCP szerver/trönk port]
+Switch(config-if)# ip dhcp snooping trust
+Switch(config)# interface [access port]
+Switch(config-if)# ip dhcp snooping limit rate [csomag/s]
+```
+*Megjegyzés: Csak a megbízható portokon (trunk vagy szerver portok) engedélyezz trust-ot!*
+
+*Ellenőrzés:*
+```plaintext
+Switch# show ip dhcp snooping
+Switch# show ip dhcp snooping binding
+```
+
+#### ARP Poisoning (ARP mérgezés/hamisítás)
+Támadó hamis ARP válaszokat küld, félreirányítja a forgalmat (pl. gateway MAC → támadó).
+**Védekezés: Dynamic ARP Inspection (DAI)**
+```plaintext
+Switch(config)# ip arp inspection vlan [szám]
+Switch(config)# interface [megbízható port]
+Switch(config-if)# ip arp inspection trust
+Switch(config)# ip arp inspection validate [src-mac/ip/dst-mac vagy src-mac + ip + dst-mac]
+```
+*Megjegyzés: A DAI a DHCP Snooping binding táblával működik!*
+
+*Ellenőrzés:*
+```plaintext
+Switch# show ip arp inspection
+Switch# show ip arp inspection statistics
+Switch# show ip arp inspection filter
+```
+
+#### VLAN Hopping (VLAN átlépési támadás)
+Pl. DTP spoofing vagy Double Tagging technika.
+**Védekezés:**
+- Trunkolás csak explicit módon
+- Módosított natív VLAN kizárólag trunk porton
+- Használaton kívüli portok letiltása vagy dedikált, nem használt VLAN-ba helyezése
+```plaintext
+Switch(config)# interface [használaton kívüli port]
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan [nem használt VLAN pl. 999]
+Switch(config-if)# shutdown
+
+Switch(config)# interface [trunk port]
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk native vlan [nem használt pl. 999]
+Switch(config-if)# switchport nonegotiate
+```
+
+#### STP támadás (Spanning Tree manipuláció)
+Támadó root bridge-nek álcázza magát, átveszi az irányítást.
+**Védekezés: PortFast + BPDU Guard minden access porton**
+```plaintext
+Switch(config)# spanning-tree portfast default
+Switch(config)# spanning-tree bpduguard default
+vagy csak egy porton:
+Switch(config)# interface [interfész]
+Switch(config-if)# spanning-tree portfast
+Switch(config-if)# spanning-tree bpduguard enable
+```
+
+#### CDP és LLDP felderítés/támadás
+A támadó ezekből információt szerezhet a hálózatról.
+**Védekezés:**
+```plaintext
+CDP globális tiltása:
+Switch(config)# no cdp run
+Port szintű tiltás:
+Switch(config)# interface [interfész]
+Switch(config-if)# no cdp enable
+
+LLDP globális tiltása:
+Switch(config)# no lldp run
+Port szintű tiltás:
+Switch(config)# interface [interfész]
+Switch(config-if)# no lldp transmit
+Switch(config-if)# no lldp receive
+```
