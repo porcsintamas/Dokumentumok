@@ -204,10 +204,22 @@ Router# show ip interface brief
 Switch(config)# spanning-tree vlan [szám] root primary
 ```
 
+#### Másodlagos bridge beállítása
+
+```
+Switch(config)# spanning-tree vlan [szám] root secondary
+```
+
 #### Root bridge beállítása: BID Prioritási érték beállítása (alacsonyabb számú a root bridge)
 
 ```
 Switch(config)# spanning-tree vlan [szám] priority [szám]
+```
+
+#### Gyorsabb kalkulálás beállítása
+
+```
+Switch(config)# spanning-tree mode rapid-pvst
 ```
 
 #### Ellenőrzés
@@ -515,10 +527,14 @@ Switch(config-if)# switchport nonegotiate
 #### STP támadás (Spanning Tree manipuláció)
 Támadó root bridge-nek álcázza magát, átveszi az irányítást.
 **Védekezés: PortFast + BPDU Guard minden access porton**
-```plaintext
+- **Összes porton:**
+```
 Switch(config)# spanning-tree portfast default
 Switch(config)# spanning-tree bpduguard default
-vagy csak egy porton:
+```
+
+- **Csak egy porton:**
+```
 Switch(config)# interface [interfész]
 Switch(config-if)# spanning-tree portfast
 Switch(config-if)# spanning-tree bpduguard enable
@@ -527,7 +543,7 @@ Switch(config-if)# spanning-tree bpduguard enable
 #### CDP és LLDP felderítés/támadás
 A támadó ezekből információt szerezhet a hálózatról.
 **Védekezés:**
-```plaintext
+```
 CDP globális tiltása:
 Switch(config)# no cdp run
 Port szintű tiltás:
