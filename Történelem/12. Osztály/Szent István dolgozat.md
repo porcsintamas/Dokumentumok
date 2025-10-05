@@ -40,7 +40,7 @@ Politikai jelentőség: az egyházi hálózat lefedte az országot, így a kirá
 
 - Könyves Kálmán: 1095 és 1116 között uralkodott, Európa egyik legműveltebb királyának tartották, kiemelkedő intelligenciája és tanultsága miatt kapta a „könyves” jelzőt. Uralkodása alatt enyhítette a korábbi törvények szigorát, nagy hangsúlyt fektetett a magántulajdon védelmére és a kóborlók letelepítésére. Jelentős külpolitikai sikere volt, hogy 1102-ben horvát királlyá koronázták, így létrejött a horvát-magyar perszonálunió.
 
-- Szent Margit:
+- Szent Margit: IV. Béla király leánya, domonkos apáca; kultusza a tatárjárás utáni fogadalomhoz kötődik, emlékezete a Margit-szigethez kapcsolódik.
 
 - Álmos: a magyarok legendás fejedelme és a hét vezér egyike, akinek vezetésével a magyarok megkezdték vándorlásukat az őshazából. Álmos volt Árpád apja, és a vérszerződés révén választották vezérré; halála a honfoglalás előtti időszakban történt, így fiára, Árpádra szállt a vezető szerep.
 
@@ -50,7 +50,7 @@ Politikai jelentőség: az egyházi hálózat lefedte az országot, így a kirá
 
 ### 4. Magyarázd! Vérszerződés, törzs, tized, kunok, ispán
 
-- Vérszerződés: A szövetségük megerősítése érdekében a 7 vezér vérszerződést kötött. Vezérek: Álmos, Előd, Ond, Kond Tas, Huba, Töhötöm
+- Vérszerződés: A szövetségük megerősítése érdekében a 7 vezér vérszerződést kötött. Vezérek: Álmos, Előd, Ond, Kond, Tas, Huba, Töhötöm
 
 - Törzs: 7 törzs alakult ki: Nyék, Megyer, Kürt-gyarmat, Tarján, Jenő, Kér, Keszi
 
@@ -58,7 +58,7 @@ Politikai jelentőség: az egyházi hálózat lefedte az országot, így a kirá
 
 - Kunok: tatárjárás idején menekültként érkeztek, és IV. Béla telepítette le őket. Katonai szolgálatért és kollektív kiváltságokért cserébe a Kiskunság és Nagykunság vidékein éltek, sokáig megőrizve saját szokásaikat.
 
-- Ispán:
+- Ispán: A vármegye királyi tisztviselője; adószedés, bíráskodás és katonai mozgósítás tartozott a feladatkörébe.
 
 ### 5. Milyen események, intézkedések előzték meg az Aranybulla kiadását?
 
@@ -110,7 +110,7 @@ A királyi hatalmat törvények, udvari szervezet és fegyveres erő támasztott
 
 - IV. Béla: II. András fia volt, a tatárjárás után újjászervezte az országot, megerősítette a várakat és támogatta a városok fejlődését. Uralkodása alatt jelentős reformokat vezetett be, ezért „második honalapítóként” emlegetik.
 
-- Szent Gellért:
+- Szent Gellért: Bencés szerzetes és püspök, István térítő munkájának kulcsszereplője; Gellért-hegy legendakörével a kereszténység megszilárdításának mártír alakja.
 
 - Árpád: a honfoglalás vezére volt, aki apja, Álmos halála után a magyar törzsek élére került, és 895–896-ban a Vereckei-hágón keresztül vezette be népét a Kárpát-medencébe. Árpád dinasztiájából származott több magyar fejedelem és király, uralma megszilárdította a magyar jelenlétet a Kárpát-medencében
 
@@ -126,7 +126,7 @@ A királyi hatalmat törvények, udvari szervezet és fegyveres erő támasztott
 
 - Tatárok: 1241–1242-ben pusztító hadjáratot vezettek Magyarország ellen (tatárjárás)
 
-- Avarok:
+- Avarok: A Kárpát-medence koraközépkori hatalmi tényezői; említésük kontextust ad a honfoglalás és királyságalapítás folyamatához
 
 ### 5. Hogyan erősítette meg a király a szerviensek jogait az Aranybullában?
 
