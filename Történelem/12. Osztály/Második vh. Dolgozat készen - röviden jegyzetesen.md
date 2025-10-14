@@ -6,17 +6,17 @@
 - **Tengelyhatalmak:** Németország–Olaszország–Japán katonai szövetsége (1940: Háromhatalmi egyezmény); csatlakozók közt Magyarország.
 - **Szövetségesek:** Anglia, USA, Szovjetunió (Atlanti Charta elvei); közös cél: a nácizmus legyőzése.
 - **Totális háború:** a gazdaság és társadalom teljes mozgósítása; civilek is célpontok (városbombázások, tengeralattjáró-háború, atombombák).
-- **Zsidótörvény:** magyar antiszemita törvények (1938, 1939, 1941): pályakorlát, faji meghatározás, vegyesházasság tiltása.
-- **Munkaszolgálat:** zsidó származású férfiak fegyvertelen kényszerszolgálata a honvédségnél; sok halálos áldozattal.
-- **Gettó:** zsidók kényszerű elkülönítésére szolgáló városrészek; Mo.-n 1944 tavaszától (Kárpátalja, majd Budapest).
-- **Deportálás:** kényszer-kitelepítés marhavagonokban; 1944. máj.–jún. kb. 440 000 magyar zsidó főként Auschwitz–Birkenauba.
+- **Zsidótörvény:** Európai jogfosztás összefoglaló neve (pl. nürnbergi törvények, 1935); állampolgári jogok elvétele, pályakorlát, vegyesházasság-tilalom; Magyarországon 1938–39–41-es zsidótörvények.
+- **Munkaszolgálat:** Náci Európában milliók kényszermunkája (Zwangsarbeit, Organisation Todt, hadiipar); Magyarországon külön rendszer a zsidó férfiak fegyvertelen frontszolgálatával, nagy veszteségekkel.
+- **Gettó:** Kényszerű elkülönítésre szolgáló városrészek Európa-szerte (Varsó, Łódź); a deportálás előszobája; Mo.-n 1944 tavaszától, majd budapesti gettó.
+- **Deportálás:**  Erőszakos elszállítás gettókból és közösségekből vasúton; 1942–44 között tömegesen a megszállt Lengyelország megsemmisítő táboraiba; Mo.-n 1944 máj.–júl. ~440 ezer fő, főleg Auschwitz–Birkenauba.
 - **Koncentrációs tábor:** tömeges fogva tartás és kényszermunka helye (pl. Auschwitz, ahol megsemmisítő részleg is működött).
-- **Lager:** németül „tábor”; a koncentrációs/haláltáborok általános megnevezése.
-- **Népirtás:** egy csoport szisztematikus megsemmisítése (zsidók holokausztja, romák üldözése).
-- **Holokauszt:** a zsidóság európai népirtása; Mo.-n 1944-ben gettósítás és deportálások Eichmann irányításával.
+- **Lager:** Németül „tábor”; gyűjtőnév: KZ-Lager (koncentrációs), Arbeitslager (munkatábor), Durchgangslager (tranzit), Vernichtungslager (megsemmisítő).
+- **Népirtás:** Szándékos, csoportellenes megsemmisítés (Lemkin, 1944; ENSZ-egyezmény, 1948); a holokauszt a zsidóság elleni genocídium, a romák ellen is történt népirtás (Porajmos).
+- **Holokauszt:** A náci Németország és kollaboránsai által elkövetett, kb. 6 millió európai zsidó megsemmisítése (1933–45); eszközei: gettósítás, deportálás, Einsatzgruppen, megsemmisítő táborok; Mo.-n 1944-ben gyors gettósítás és deportálás.
 - **Vörös Hadsereg:** szovjet hadsereg; Kelet-Európa felszabadítása, Berlin ostroma, magyar városok (pl. Budapest) „felszabadítása”.
 - **Jalta–Teherán–Potsdam találkozók:** Teherán (1943): második front, Sztálin Japán ellen; Jalta (1945): háború utáni rendezés, Lengyelország; Potsdam (1945): Németország övezetekre, nácizmus felszámolása, ENSZ, főbűnösök felelősségre vonása.
-- **Háborús bűn:** a háború jogának súlyos megsértése (civilek lemészárlása, népirtás); a nürnbergi perekben ítélték el a főbűnösöket.
+- **Háborús bűn:** A hadijog súlyos megsértése (pl. civilek elleni kegyetlenség, hadifoglyok bántalmazása); a nürnbergi perekben külön kategóriák: háborús bűnök, emberiesség elleni bűntettek és népirtás.
 
 ## Személyek
 
@@ -42,4 +42,4 @@
 - **Pearl Harbor:** Hawaii; 1941. dec. 7. – japán támadás az USA flottája ellen.
 - **Hirosima:** japán város; 1945. aug. 6. – első atomtámadás.
 - **Don kanyar:** a Don folyó kanyarulata; a 2. magyar hadsereg megsemmisülése (1943 tele).
-- **Auschwitz:** náci koncentrációs és haláltábor a megszállt Lengyelországban; 1944-ben a magyar deportálások fő célpontja.
+- **Auschwitz:** A legnagyobb náci táborkomplexum (Auschwitz I, Birkenau – megsemmisítő, Monowitz – munkatábor); kb. 1,1 millió áldozat, 1944-ben a magyar deportáltak fő célpontja.

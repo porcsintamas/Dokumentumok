@@ -6,17 +6,17 @@
 - **Tengelyhatalmak:** A Németország, Olaszország és Japán által alkotott katonai szövetség volt (1940: Háromhatalmi egyezmény), amelyhez Magyarország is csatlakozott.
 - **Szövetségesek:** Nagy-Britannia, az Egyesült Államok és a Szovjetunió alkotta a fő szövetséget, céljuk a nácizmus szétzúzása volt az Atlanti Charta elvei alapján.
 - **Totális háború:** A társadalom és a gazdaság teljes mozgósítását jelentette, amelyben a civilek és városok is célponttá váltak (bombázások, tengeralattjáró-háború, atombombák).
-- **Zsidótörvény:** Magyarországon 1938-tól antiszemita törvények korlátozták a zsidók jogait (pályakvóták, faji meghatározás, vegyesházasság tiltása).
-- **Munkaszolgálat:** A zsidó származású férfiakat fegyver nélkül, kényszermunkára osztották be a honvédségnél, ami sokuk halálához vezetett.
-- **Gettó:** A zsidó lakosság kényszerű elkülönítésére kijelölt városrészek voltak, amelyeket Magyarországon 1944 tavaszától hoztak létre (először Kárpátalján, majd Budapesten).
-- **Deportálás:** A zsidókat 1944. május–június között tömegesen, lezárt marhavagonokban szállították el, főként Auschwitz–Birkenauba.
-- **Koncentrációs tábor:** Olyan tábor, ahol tömeges fogva tartás és kényszermunka folyt, és több helyen megsemmisítő funkció is működött (például Auschwitz).
-- **Lager:** A „Lager” német szó tábort jelent, és általánosan a náci koncentrációs és haláltáborokat jelölte.
-- **Népirtás:** Egy etnikai, vallási vagy nemzeti csoport szisztematikus megsemmisítése, amelyre a holokauszt és a romák elleni üldözés a példa.
-- **Holokauszt:** A zsidóság európai népirtása, amely Magyarországon 1944-ben gettósítással és deportálásokkal zajlott Eichmann irányításával és a magyar hatóságok közreműködésével.
+- **Zsidótörvény:** Európa-szerte jogfosztó intézkedések (pl. a nürnbergi törvények 1935-ben) határozták meg a „zsidóságot”, elvették jogaikat és tiltották a vegyesházasságot; Magyarországon ezt az 1938–39–41-es zsidótörvények követték.
+- **Munkaszolgálat:** A náci Európában milliókat kényszerítettek munkára a hadiiparban és építkezéseken; Magyarországon a zsidó férfiak fegyvertelen munkaszolgálata különösen halálos volt a fronton és táborokban.
+- **Gettó:** A zsidó lakosságot Európa-szerte elkülönített városrészekbe kényszerítették (például Varsó és Łódź), ami a deportálás előszobája volt; Magyarországon 1944 tavaszától, Budapesten külön nagy gettó létesült.
+- **Deportálás:** A zsidókat 1942–44 között tömegesen, lezárt vasúti vagonokban szállították a megszállt Lengyelország megsemmisítő táboraiba; Magyarországról 1944 májusa és júliusa között kb. 440 ezer embert vittek főként Auschwitz–Birkenauba.
+- **Koncentrációs tábor:** Olyan tábor, ahol tömeges fogva tartás és kényszermunka folyt, és több helyen megsemmisítő tábor is működött (például Auschwitz).
+- **Lager:** A „Lager” német szó gyűjtőfogalom a különféle náci táborokra (koncentrációs, munkatábor, tranzit- és megsemmisítő tábor), amelyet a túlélők is „lágerként” emlegettek.
+- **Népirtás:** A szándékos, csoportellenes megsemmisítést jelenti (Lemkin 1944, ENSZ 1948), amelynek legnagyobb példája a holokauszt, és ide tartozik a romák elleni népirtás is.
+- **Holokauszt:** A náci Németország és kollaboránsai kb. 6 millió európai zsidót semmisítettek meg gettók, deportálások, kivégzőosztagok és megsemmisítő táborok rendszerével; Magyarországon 1944-ben zajlott a gettósítás és a gyors deportálás.
 - **Vörös Hadsereg:** A Szovjetunió hadserege volt, amely Kelet-Európát elfoglalva Berlinig nyomult, és 1945 februárjában Budapestet is „felszabadította”.
 - **Jalta–Teherán–Potsdam találkozók:** Teheránban (1943) megállapodtak a második front megnyitásáról és a Szovjetunió Japán elleni fellépéséről, Jaltán (1945) a háború utáni rendezésről és Lengyelország határairól, Potsdamban (1945) Németország megszállási övezeteiről, a nácizmus felszámolásáról és a főbűnösök felelősségre vonásáról döntöttek.
-- **Háborús bűn:** A háború jogának súlyos megsértése, például civilek lemészárlása és a népirtás, amely miatt a nürnbergi perekben ítéltek el vezetőket.
+- **Háborús bűn:** A hadijog megsértése (pl. civilek elleni erőszak, hadifoglyok bántalmazása), amelyet a nürnbergi perekben a „háborús bűnök” mellett „emberiesség elleni bűntettek” és „népirtás” kategóriáival együtt ítéltek meg.
 
 ## Személyek
 
@@ -42,4 +42,4 @@
 - **Pearl Harbor:** Hawaiin 1941. december 7-én japán támadás érte az amerikai csendes-óceáni flottát.
 - **Hirosima:** A japán várost 1945. augusztus 6-án érte az első atomtámadás.
 - **Don-kanyar:** A Don folyó kanyarulatánál a 2. magyar hadsereg 1942–43 telén megsemmisítő vereséget szenvedett.
-- **Auschwitz:** A megszállt Lengyelországban működő koncentrációs és haláltábor volt, ahová 1944-ben a magyar deportáltak többségét szállították.
+- **Auschwitz:** A megszállt Lengyelországban fekvő legnagyobb náci táborkomplexum (Auschwitz I, Birkenau és Monowitz; koncentrációs, megsemmisítő és munkatáborok), ahol kb. 1,1 millió embert öltek meg, és 1944-ben ez volt a magyar deportáltak fő célpontja.
