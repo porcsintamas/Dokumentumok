@@ -53,7 +53,7 @@ A Harmadik Birodalom állami és katonai szerveinek részvételével:
 ## 5. A holokauszt áldozatai
 
 -  A zsidó áldozatok száma (mértékadó vélemények szerint) 5,8-6 millió fő volt;
--  legalább ugyanennyi cigányt, lengyelt, oroszt, ukránt, vagy hite, világnézete miatt ellenségnek számító embert pusztítottak el.
+-  legalább ugyanennyi cigányt, lengyelt, oroszt, ukránt, vagy Hitler világnézete miatt ellenségnek számító embert pusztítottak el.
 
 ---
 
