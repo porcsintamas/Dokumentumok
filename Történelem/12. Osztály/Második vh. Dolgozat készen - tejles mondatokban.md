@@ -22,7 +22,7 @@
 
 - **Roosevelt:** Franklin D. Roosevelt az Egyesült Államok elnöke volt, az Atlanti Charta és a teheráni, jaltai konferenciák kulcsszereplője, aki 1945 áprilisában halt meg.
 - **Churchill:** Winston Churchill Nagy-Britannia miniszterelnöke volt, aki az angliai csatában helytállt és a D-nap előkészítésében vezető szerepet vitt, majd Potsdamban Attlee váltotta.
-- **De Gaulle:** Charles de Gaulle a Szabad Franciaország vezetője volt, a francia ellenállás jelképe, és a felszabadítás után kormányfő lett.
+- **De Gaulle:** Charles de Gaulle a Szabad Franciaország vezetője volt, a francia ellenállás jelképe, és a felszabadítás után kormányfő lett. Az 1944. június 6.-ai Normandiai partraszállásnál az egyik hadvezér volt. 
 
 ## Évszámok
 
@@ -31,7 +31,7 @@
 - **1941. június 22.:** A Barbarossa-hadművelet keretében Németország megtámadta a Szovjetuniót.
 - **1941. december 7.:** Japán megtámadta Pearl Harbort, mire az Egyesült Államok belépett a háborúba.
 - **1943. február:** A sztálingrádi csata szovjet győzelemmel ért véget, és ekkor zajlott a 2. magyar hadsereg katasztrófája is a Don-kanyarban.
-- **1944. június 6.:** A szövetségesek Normandiában partra szálltak, és ezzel megnyílt a második front.
+- **1944. június 6.:** D-Day/D-nap: A szövetségesek Normandiában partra szálltak, és ezzel megnyílt a második front, és felszabadították Párizst.
 - **1945. május 8–9.:** Németország feltétel nélkül megadta magát, és véget ért az európai háború.
 - **1945. augusztus 6.:** Az Egyesült Államok atombombát dobott Hirosimára, ami Japán kapitulációjához vezetett.
 

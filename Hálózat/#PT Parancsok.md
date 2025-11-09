@@ -350,7 +350,9 @@ Router(config-if)# standby [csoportszám] preempt
 
 ```
 Router(config)# router rip
+Router(config-router)# version 2 
 Router(config-router)# network [hálózati cím]
+Router(config-router)# no auto-summary 
 ```
 
 ----------------------------------
