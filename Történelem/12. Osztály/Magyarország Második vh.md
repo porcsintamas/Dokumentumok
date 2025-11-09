@@ -9,8 +9,7 @@
 - **fellépett a megerősödő szélsőjobboldal ellen**
 
 **Szálasi Ferenc vezette Nemzeti Akarat Pártja**
-
-**nyilasok – nácizmus – fasizmus utánzása !**
+- **nyilasok – nácizmus – fasizmus utánzása !**
 
 ---
 
