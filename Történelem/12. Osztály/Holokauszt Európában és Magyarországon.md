@@ -34,7 +34,7 @@ Meghatározták, ki tekintendő zsidónak, megfosztották őket **jogaik**tól:
 -  megtiltották az árjákkal való **házasság**ot;
 -  **gettó**kba kényszerítették őket (elkülönítésükkel előkészítették a deportálásukat);
 -  a megszállt területekről a zsidókat németországi **munkatábor**okba szállították, és rossz ellátás mellett nehéz fizikai munkát végeztettek velük;
--  1941. szeptemberétől kötelezővé tették a **sárga csillag** viselését (megkönnyítette, hogy a hatóságok ellenőrizzék, elszigeteljék és megalázzák őket);
+-  1941\. szeptemberétől kötelezővé tették a **sárga csillag** viselését (megkönnyítette, hogy a hatóságok ellenőrizzék, elszigeteljék és megalázzák őket);
 -  hasonló intézkedések történtek a **megszállt** és a nácikkal **szövetséges országok**ban, pl. Magyarországon, Romániában, Bulgáriában, Lengyelországban, Hollandiában.
 
 ## 4. A fajvédő program megvalósítása
@@ -44,7 +44,7 @@ A Harmadik Birodalom állami és katonai szerveinek részvételével:
 -  a háború előtt **kivándoroltattak** több mint félmillió embert Németországból, a megmenekülésért nagy összegű illetéket fizettettek velük;
 -  Lengyelországban **koncentrációs táborok**at hoztak létre, melyek valódi feladata a zsidóság fizikai megsemmisítése volt;
 -  a megszállt szovjet területeken különleges **SS-alakulatok** (Einsatzgruppe) feladata volt zsidók, cigányok, ellenállók megölése: több mint egymillió embert tömegsírokba lőttek vagy teherautók rakterébe vezetett kipufogógázzal megmérgeztek;
--  1942 ben a **wannsee-i konferenciá**n a zsidó emberek személytelen és iparszerű elpusztításáról döntöttek:
+-  1942-ben a **wannsee-i konferenciá**n a zsidó emberek személytelen és iparszerű elpusztításáról döntöttek:
 	-  keleten (Auschwitz, Treblinka, Belsec) **megsemmisítő táborok**at alakítottak ki;
 	-  a foglyokat - emberi méltóságukat lerombolva - **marhavagon**okban szállították;
 	-  a munkaképeseket nehéz fizikai munkával halálra kínozták;
@@ -82,7 +82,7 @@ A dualizmus kori befogadással szemben a Horthy-korszak **keresztény-nemzeti id
 -  az 1944. március 19-i **német megszállás** után szisztematikus zsidóüldözés kezdődött:
 -  előírták a sárga csillag viselését;
 -  a zsidónak minősített emberek vagyonát elkobozták és kiárusították:
--  1944. április 16-án Kárpátalján állították föl az első gettókat és gyűjtőtáborokat.
+-  1944\. április 16-án Kárpátalján állították föl az első gettókat és gyűjtőtáborokat.
 
 ## 3. A magyarországi holokauszt
 
@@ -97,7 +97,7 @@ Magyarország német oldalon való belépése a háborúba rontotta a zsidóság
 ### 1944. március 19. után
 
 -  A vidéki zsidó lakosságot **gyűjtőtábor**ba szállították;
--  1944. május 15-től megkezdődtek a tömeges **deportálás**ok, június végéig mintegy 440 000 embert lezárt marhavagonokban szállítottak **koncentrációs tábor**okba, illetve **haláltábor**okba (főleg **Auschwitz-Birkenau**ba);
+-  1944\. május 15-től megkezdődtek a tömeges **deportálás**ok, június végéig mintegy 440 000 embert lezárt marhavagonokban szállítottak **koncentrációs tábor**okba, illetve **haláltábor**okba (főleg **Auschwitz-Birkenau**ba);
 -  az Adolf Eichmann által irányított műveletet a magyar közigazgatás és a csendőrség aktív közreműködésével hajtották végre;
 -  1944 júniusában lezajlott a budapesti zsidóság **gettó**sítása;
 -  elhurcolásukat nemzetközi tiltakozás akadályozta meg.
