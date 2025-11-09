@@ -3,11 +3,13 @@
 ---
 
 *1936 – Gömbös Gyula halála után*
+
 **DARÁNYI KÁLMÁN  1936–1938 lesz a miniszterelnök, aki**
 
 - **fellépett a megerősödő szélsőjobboldal ellen**
 
 **Szálasi Ferenc vezette Nemzeti Akarat Pártja**
+
 **nyilasok – nácizmus – fasizmus utánzása !**
 
 ---
@@ -143,6 +145,7 @@ ___
 - *M.o.?*
 
 **1941. június 26.: felségjelzés nélküli repülők bombázzák Kassát**
+
 **Ki támadott?**
 - **szovjetek?**
 - **németek?** *(provokálás)*
@@ -216,6 +219,7 @@ ___
 ---
 
 **Az utolsó pillanatig harc a németek oldalán!**
+
 **Megérkeznek az orosz felszabadító csapatok**
 - **1944. december – 1945. február 13. – Budapest felszabadítása**
 - **1945. április – vidéken is megszűnnek a harcok**
