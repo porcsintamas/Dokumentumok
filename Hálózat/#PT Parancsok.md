@@ -559,3 +559,26 @@ Switch(config)# interface [interfész]
 Switch(config-if)# no lldp transmit
 Switch(config-if)# no lldp receive
 ```
+
+### Statikus forgalomirányítás
+
+#### Next Hop
+```
+Router(config)# ip route [célhálózat] [alhálózati maszk] [következő ugrási cím]
+```
+
+#### Közvetlenül csatlakozó (serial kábel)
+```
+Router(config)# ip route [célhálózat] [alhálózati maszk] [kimenő interfész]
+```
+
+#### Lebegő statikus útvonal
+```
+Router(config)# ip route [célhálózat] [alhálózati maszk] [következő ugrási cím] [adminisztratív távolság]
+```
+
+#### Az összes csomag elküldése a következő routerhez (statikus alapértelmezett útvonal):
+```
+Router(config)# ip route 0.0.0.0 0.0.0.0 [következő ugrási cím]
+Router(config)# ip route 0.0.0.0 0.0.0.0 [kimenő interfész]
+```
