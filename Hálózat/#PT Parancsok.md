@@ -559,3 +559,73 @@ Switch(config)# interface [interfész]
 Switch(config-if)# no lldp transmit
 Switch(config-if)# no lldp receive
 ```
+
+### IPv4 Statikus forgalomirányítás
+
+#### Next Hop
+```
+Router(config)# ip route [célhálózat] [alhálózati maszk] [következő ugrási cím]
+```
+
+#### Közvetlenül csatlakozó (serial kábel) / Statikus útvonal
+```
+Router(config)# ip route [célhálózat] [alhálózati maszk] [kimenő interfész]
+```
+
+#### Lebegő/Tartalék next hop és statikus útvonal
+```
+Router(config)# ip route [célhálózat] [alhálózati maszk] [következő ugrási cím] [adminisztratív távolság]
+Router(config)# ip route [célhálózat] [alhálózati maszk] [kimenő interfész] [adminisztratív távolság]
+```
+
+#### Az összes csomag elküldése a következő routerhez (alapértelmezett statikus útvonal):
+```
+Router(config)# ip route 0.0.0.0 0.0.0.0 [kimenő interfész]
+Router(config)# ip route 0.0.0.0 0.0.0.0 [következő ugrási cím]
+```
+
+#### Infó
+```
+Router# show ip route
+```
+
+### Naplóüzenetek kikapcsolása
+```
+Router(config)# no logging [on/conscole/buffered/monitor]
+```
+
+### IPv6 Statikus forgalomirányítás
+
+- ***`ipv6 enable`-t és `ipv6 unicast-routing`-ot ki kell adni előtte!***
+
+#### Next Hop
+```
+Router(config)# ipv6 route [célhálózat]/[prefix] [következő ugrási cím]
+```
+
+#### Közvetlenül csatlakozó (serial kábel) / Statikus útvonal
+```
+Router(config)# ipv6 route [célhálózat]/[prefix] [kimenő interfész]
+```
+
+#### Teljes statikus útvonal
+```
+Router(config)# ipv6 route [célhálózat]/[prefix] [kimenő interfész] [következő ugrási cím]
+```
+
+#### Lebegő/Tartalék next hop és statikus útvonal
+```
+Router(config)# ipv6 route [célhálózat]/[prefix] [következő ugrási cím] [adminisztratív távolság]
+Router(config)# ipv6 route [célhálózat]/[prefix] [kimenő interfész] [adminisztratív távolság]
+```
+
+#### Az összes csomag elküldése a következő routerhez (alapértelmezett statikus útvonal):
+```
+Router(config)# ipv6 route ::/0 [kimenő interfész]
+Router(config)# ipv6 route ::/0 [következő ugrási cím]
+```
+
+#### Infó
+```
+Router# show ipv6 route
+```
