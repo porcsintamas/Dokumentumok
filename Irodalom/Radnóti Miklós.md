@@ -46,10 +46,17 @@
 	- → A megtört életeket vagy a foglyok vánszorgását jelképezheti.
 - Szerkezete:
 	1\. Szerkezeti egység (1-6. sor):
+
 		- Kiábrándult pesszimizmus jellemzi, de mégis ott a remény.
+
 	2\. Szerkezeti egység (7-10. sor):
+
 		- Végletes kétségbeesés jellemzi: nincs már hova hazatérni.
+
 	3\. Szerkezeti egység (11-18. sor):
+
 		- A vágyott idilli otthon képei reményt jelentenek.
+
 	4\. Szerkezeti egység (19-20. sor):
+	
 		- Pozitív végkicsengés, reméykedés a túlélésben.
