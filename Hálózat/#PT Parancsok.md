@@ -84,6 +84,7 @@ Router(config)# ipv6 unicast-routing
 #### Multilayer Switchnél
 ```
 Switch(config)# sdm prefer dual-ipv4-and-ipv6 default
+```
 
 ### IPv6 cím és link-local cím beállítása
 ```
