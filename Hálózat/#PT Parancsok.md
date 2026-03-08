@@ -81,6 +81,11 @@ Router(config)# ipv6 enable
 Router(config)# ipv6 unicast-routing
 ```
 
+#### Multilayer Switchnél
+```
+Switch(config)# sdm prefer dual-ipv4-and-ipv6 default
+```
+
 ### IPv6 cím és link-local cím beállítása
 ```
 Router(config)# interface [interfész]
@@ -628,4 +633,29 @@ Router(config)# ipv6 route ::/0 [következő ugrási cím]
 #### Infó
 ```
 Router# show ipv6 route
+```
+
+### IPv6 HSRP
+
+#### Routernél
+```
+Router(config)# ipv6 unicast-routing
+Router(config)# interface [interfész]
+Router(config-if)# ipv6 address [cím]/[prefix]
+Router(config-if)# ipv6 address [link-local cím] link-local
+Router(config-if)# standby version 2
+Router(config-if)# standby [szám] ipv6 autoconfig
+...
+```
+
+#### Multilayer Switchnél (L3)
+```
+Switch(config)# sdm prefer dual-ipv4-and-ipv6 routing
+Switch(config)# vlan [szám]
+Switch(config)# interface vlan [szám]
+Switch(config-if)# ipv6 address [cím]/[prefix]
+Switch(config-if)# ipv6 address [link-local cím] link-local
+Switch(config-if)# standby version 2
+Switch(config-if)# standby [szám] ipv6 autoconfig
+...
 ```
