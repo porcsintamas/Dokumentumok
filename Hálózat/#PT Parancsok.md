@@ -358,7 +358,19 @@ Router(config)# router rip
 Router(config-router)# version 2 
 Router(config-router)# network [hálózati cím]
 Router(config-router)# no auto-summary 
+Router(config-router)# passive-interface [interfész]
 ```
+
+#### Perem Routernél
+
+```
+Router(config)# ip route 0.0.0.0 0.0.0.0 [interfész serial kábelnél]
+Router(config)# router rip
+...
+Router(config-router)# default-information originate
+```
+
+> **Hálózati cím:** A routerhez közvetlenül csatlakoztatott hálózatok (PC valamint Routerek közötti hálózat is)
 
 ----------------------------------
 
