@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSZTV 2025 – Informatikai rendszer- és alkalmazás-üzemeltető technikus | Interaktív Feladatsor</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+    }
+    html.dark {
+      --bg-page: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+    }
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    .option-label {
+      transition: all 0.15s ease-in-out;
+    }
+    .option-label:hover:not(.graded-locked) {
+      border-color: #3b82f6;
+      background-color: rgba(59, 130, 246, 0.05);
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .question-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased pb-24">
+
+  <!-- Top Sticky Navigation & Status Bar -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800 shadow-sm no-print">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+          2025
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-tight">
+              OSZTV 2025 – Területi előválogató
+            </h1>
+            <a href="index.html" class="text-xs px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:underline font-medium border border-slate-200 dark:border-slate-700">
+              Átváltás a 2026-os feladatsorra →
+            </a>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            5 0612 12 02 Informatikai rendszer- és alkalmazás-üzemeltető technikus
+          </p>
+        </div>
+      </div>
+
+      <!-- Progress & Timer -->
+      <div class="flex items-center gap-3 sm:gap-5 flex-wrap">
+        <!-- Answered Counter -->
+        <div class="flex flex-col min-w-[140px]">
+          <div class="flex justify-between text-xs font-medium mb-1">
+            <span class="text-slate-600 dark:text-slate-300">Kitöltve:</span>
+            <span id="progress-text" class="font-bold text-indigo-600 dark:text-indigo-400">0 / 148 (0%)</span>
+          </div>
+          <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-indigo-600 transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Timer -->
+        <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5">
+          <svg class="w-4 h-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span id="timer-display" class="font-mono text-sm font-bold text-slate-800 dark:text-slate-200">180:00</span>
+          <button id="timer-toggle-btn" onclick="toggleTimer()" title="Időmérő indítása / szüneteltetése" class="ml-1 text-xs px-2 py-0.5 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition">
+            Indít
+          </button>
+          <button onclick="resetTimer()" title="Időmérő visszaállítása (180 perc)" class="text-xs px-1.5 py-0.5 rounded text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+            ↺
+          </button>
+        </div>
+
+        <!-- Question Map Toggle -->
+        <button onclick="toggleNavigator()" class="text-xs font-medium px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition">
+          <span>Kérdéstérkép</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleDarkMode()" title="Sötét / Világos mód" class="p-2 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Question Navigator Drawer -->
+    <div id="navigator-drawer" class="hidden border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/95 max-h-72 overflow-y-auto">
+      <div class="max-w-5xl mx-auto px-4 py-3">
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Gyorsnavigáció (148 feladat – 300 pont)</span>
+          <div class="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400 flex-wrap">
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700 inline-block"></span> Megválaszolatlan</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block"></span> Megjelölt</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block"></span> Helyes</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> Részpont / Kihagyott</span>
+            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-rose-600 inline-block"></span> Hibás</span>
+          </div>
+        </div>
+        <div id="navigator-grid" class="grid grid-cols-10 sm:grid-cols-15 md:grid-cols-25 gap-1.5"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 pt-6 space-y-6">
+
+    <!-- Official Cover Card -->
+    <section class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm">
+      <div class="text-center border-b border-slate-200 dark:border-slate-700 pb-5 mb-5">
+        <p class="text-xs font-semibold tracking-widest uppercase text-indigo-600 dark:text-indigo-400 mb-1">
+          Magyar Kereskedelmi és Iparkamara
+        </p>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+          Országos Szakmai Tanulmányi Verseny – Területi előválogató
+        </h2>
+        <p class="text-sm font-semibold text-slate-600 dark:text-slate-300 mt-1">
+          KOMPLEX ÍRÁSBELI FELADATSOR (2025.)
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-5">
+        <div class="bg-slate-50 dark:bg-slate-900/60 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 space-y-1.5">
+          <div><span class="font-semibold text-slate-500 dark:text-slate-400">Szakma:</span> <span class="font-medium text-slate-900 dark:text-slate-100">5 0612 12 02 Informatikai rendszer- és alkalmazás-üzemeltető technikus</span></div>
+          <div><span class="font-semibold text-slate-500 dark:text-slate-400">KKK rendelet száma:</span> <span class="text-slate-800 dark:text-slate-200">2019. évi LXXX. törvény 11. § (2) bekezdése szerint</span></div>
+        </div>
+        <div class="bg-slate-50 dark:bg-slate-900/60 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/80 space-y-1.5">
+          <div><span class="font-semibold text-slate-500 dark:text-slate-400">Komplex írásbeli feladat:</span> <span class="text-slate-800 dark:text-slate-200">Alapismeretek, Hálózatok, Hálózati operációs rendszerek, Felhőszolgáltatás</span></div>
+          <div class="flex flex-wrap gap-4 pt-1">
+            <span><strong class="text-slate-500 dark:text-slate-400">Elérhető pontszám:</strong> <span class="font-bold text-indigo-600 dark:text-indigo-400">300 pont</span> (148 feladat)</span>
+            <span><strong class="text-slate-500 dark:text-slate-400">Időtartam:</strong> <span class="font-bold">180 perc</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Competitor Code (Versenyzői kód: [ ] / 23 / [ ]) & Instructions Toggle -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+            Versenyzői kód:
+          </span>
+          <div class="inline-flex items-center gap-1.5 font-mono">
+            <input
+              id="competitor-code-1"
+              type="text"
+              maxlength="6"
+              placeholder="___"
+              oninput="saveState()"
+              class="w-20 px-2.5 py-1.5 text-center text-sm rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <span class="text-base font-bold text-slate-500">/ 23 /</span>
+            <input
+              id="competitor-code-2"
+              type="text"
+              maxlength="6"
+              placeholder="___"
+              oninput="saveState()"
+              class="w-20 px-2.5 py-1.5 text-center text-sm rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
+        </div>
+
+        <button
+          onclick="document.getElementById('instructions-box').classList.toggle('hidden')"
+          class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 self-start sm:self-auto no-print"
+        >
+          <span>ℹ️ Fontos tudnivalók megjelenítése / elrejtése</span>
+        </button>
+      </div>
+
+      <!-- Collapsible Official Instructions -->
+      <div id="instructions-box" class="hidden mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+        <p class="font-semibold text-slate-800 dark:text-slate-100">Kedves Versenyző! A feladatok megoldásánál ügyeljen a következők betartására:</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>A tesztfeladatok többségénél <strong>csak 1 helyes válasz</strong> adható (2 pont). Amennyiben egy kérdést kihagy vagy rossz választ jelöl meg, a feladatra kapott pontszám <strong>0 pont</strong>!</li>
+          <li>A <strong>III. tesztfeladatsorban (Hálózati operációs rendszerek) két kérdésnél (16. és 21.) két helyes válasz</strong> megjelölése szükséges (4 pont). Ha bármelyik választ kihagyja, vagy nem megfelelőt is megjelöl, pontlevonás jár.</li>
+          <li>A megjelölt válaszokat az űrlap automatikusan menti a böngészőben, a <strong>„Feladatsor beküldése és javítása”</strong> gombra kattintva pedig azonnal kiértékeli.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Evaluation Result Banner (Hidden until graded) -->
+    <section id="results-panel" class="hidden bg-white dark:bg-slate-800 border-2 border-indigo-500/80 dark:border-indigo-500/60 rounded-2xl p-6 shadow-md space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700 pb-5">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-200 mb-2">
+            ✓ Kiértékelés kész (2025)
+          </span>
+          <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white">
+            Elért eredmény: <span id="score-total" class="text-indigo-600 dark:text-indigo-400">0 / 300 pont</span>
+            <span id="score-percent" class="text-lg font-bold text-slate-500 dark:text-slate-400 ml-1">(0%)</span>
+          </h3>
+          <p id="result-competitor-id" class="text-xs text-slate-500 dark:text-slate-400 mt-1"></p>
+        </div>
+
+        <!-- Quick Stats Pills -->
+        <div class="flex flex-wrap gap-2.5">
+          <div class="px-3.5 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs">
+            <div class="font-semibold">Hibátlan válasz</div>
+            <div id="stat-correct" class="text-lg font-extrabold">0 db</div>
+          </div>
+          <div id="stat-partial-box" class="hidden px-3.5 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs">
+            <div class="font-semibold">Részpontszámos</div>
+            <div id="stat-partial" class="text-lg font-extrabold">0 db</div>
+          </div>
+          <div class="px-3.5 py-2 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs">
+            <div class="font-semibold">Hibás válasz</div>
+            <div id="stat-wrong" class="text-lg font-extrabold">0 db</div>
+          </div>
+          <div class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs">
+            <div class="font-semibold">Kihagyott</div>
+            <div id="stat-skipped" class="text-lg font-extrabold">0 db</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakdown by Section -->
+      <div id="section-breakdown" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5"></div>
+
+      <!-- Post-Grading Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200 dark:border-slate-700 no-print">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 mr-1">Szűrés eredmény szerint:</span>
+          <button onclick="setResultFilter('all')" id="rfilter-all" class="text-xs px-3 py-1.5 rounded-lg font-medium bg-indigo-600 text-white">
+            Összes (148)
+          </button>
+          <button onclick="setResultFilter('mistakes')" id="rfilter-mistakes" class="text-xs px-3 py-1.5 rounded-lg font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200">
+            Csak hibás vagy kihagyott
+          </button>
+          <button onclick="setResultFilter('wrong')" id="rfilter-wrong" class="text-xs px-3 py-1.5 rounded-lg font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200">
+            Csak hibás
+          </button>
+          <button onclick="setResultFilter('correct')" id="rfilter-correct" class="text-xs px-3 py-1.5 rounded-lg font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200">
+            Csak hibátlan
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="text-xs font-semibold px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition">
+            🖨️ Nyomtatás / PDF
+          </button>
+          <button onclick="unlockForEditing()" class="text-xs font-semibold px-3.5 py-2 rounded-lg border border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 transition">
+            ✏️ Válaszok módosítása
+          </button>
+          <button onclick="resetQuiz()" class="text-xs font-semibold px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white transition">
+            🔄 Új kitöltés
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Tabs & Search Bar -->
+    <section class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-sm space-y-3 no-print">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap gap-1.5" id="section-tabs">
+          <button onclick="setSectionFilter('all')" data-sec="all" class="sec-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 text-white transition">
+            Összes (148)
+          </button>
+          <button onclick="setSectionFilter('sec1')" data-sec="sec1" class="sec-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-700/70 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+            I. Alapismeretek (40)
+          </button>
+          <button onclick="setSectionFilter('sec2')" data-sec="sec2" class="sec-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-700/70 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+            II. Hálózatok (60)
+          </button>
+          <button onclick="setSectionFilter('sec3')" data-sec="sec3" class="sec-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-700/70 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+            III. Hálózati OS (28)
+          </button>
+          <button onclick="setSectionFilter('sec4')" data-sec="sec4" class="sec-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-700/70 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+            IV. Felhőszolgáltatások (20)
+          </button>
+        </div>
+
+        <!-- Search & Unanswered Filter -->
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Keresés a kérdésekben..."
+            oninput="renderQuestions()"
+            class="flex-1 sm:w-56 px-3 py-1.5 text-xs sm:text-sm rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+          <label class="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 cursor-pointer whitespace-nowrap select-none">
+            <input type="checkbox" id="only-unanswered" onchange="renderQuestions()" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+            <span>Csak megválaszolatlan</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Questions Container -->
+    <div id="questions-container" class="space-y-6"></div>
+
+    <!-- Official Print Footer Box -->
+    <section class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-sm mt-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="text-sm text-slate-600 dark:text-slate-300 space-y-1">
+          <p class="font-semibold text-slate-900 dark:text-white">Feladatsor lezárása és kiértékelése (2025)</p>
+          <p class="text-xs">Beküldés után a rendszer azonnal kiszámítja az elért pontszámot, és megmutatja a helyes megoldásokat.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 no-print">
+          <button
+            onclick="resetQuiz()"
+            type="button"
+            class="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 text-sm font-semibold transition"
+          >
+            Válaszok törlése
+          </button>
+          <button
+            onclick="submitAndGrade()"
+            type="button"
+            class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition flex items-center gap-2"
+          >
+            <span>✓ Feladatsor beküldése és javítása</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Bottom Action Bar -->
+  <div class="fixed bottom-0 inset-x-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-t border-slate-200 dark:border-slate-800 py-3 px-4 shadow-lg no-print">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+      <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+        <span id="bottom-status-text">Megválaszolva: <strong>0 / 148</strong> kérdés</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <button
+          id="jump-unanswered-btn"
+          onclick="jumpToNextUnanswered()"
+          class="text-xs sm:text-sm px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium transition"
+        >
+          Következő hiányzó ↓
+        </button>
+        <button
+          id="floating-submit-btn"
+          onclick="submitAndGrade()"
+          class="text-xs sm:text-sm px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow transition"
+        >
+          Beküldés és javítás
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal for Unanswered Questions -->
+  <div id="confirm-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 no-print">
+    <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
+      <div class="flex items-center gap-3 text-amber-600 dark:text-amber-400">
+        <svg class="w-7 h-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Megválaszolatlan kérdések!</h4>
+      </div>
+      <p id="confirm-modal-text" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+      <div class="flex justify-end gap-2.5 pt-2">
+        <button
+          onclick="closeConfirmModal(true)"
+          class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-700"
+        >
+          Ugrás a hiányzóhoz
+        </button>
+        <button
+          onclick="closeConfirmModal(false); performGrading();"
+          class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold"
+        >
+          Beküldés és javítás így is
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // FULL OFFICIAL 2025 QUESTION BANK (148 QUESTIONS, 300 POINTS)
+    // =========================================================================
+    const SECTIONS = [
+      {
+        id: 'sec1',
+        title: 'I. tesztfeladatsor - Alapismeretek',
+        maxPoints: 80,
+        description: 'Minden feladatnál csak 1 lehetőség választható. Ha bármelyik választ kihagyja, vagy nem megfelelőt jelöl meg, az elért pontszám 0.'
+      },
+      {
+        id: 'sec2',
+        title: 'II. tesztfeladatsor - Hálózatok',
+        maxPoints: 120,
+        description: 'Minden feladatnál csak 1 lehetőség választható. Ha bármelyik választ kihagyja, vagy nem megfelelőt jelöl meg, az elért pontszám 0.'
+      },
+      {
+        id: 'sec3',
+        title: 'III. tesztfeladatsor – Hálózati operációs rendszerek',
+        maxPoints: 60,
+        description: 'Két kérdésnél (16. és 21.) két helyes válasz szükséges (4 pont). Ha bármelyik választ kihagyja, vagy nem megfelelőt is megjelöl, pontlevonás jár. A többi kérdés helyes válasz esetén 2 pontot, helytelen megoldásnál 0 pontot ér.'
+      },
+      {
+        id: 'sec4',
+        title: 'IV. tesztfeladatsor - Felhőszolgáltatások',
+        maxPoints: 40,
+        description: 'Minden feladatnál csak 1 lehetőség választható. Ha bármelyik választ kihagyja, vagy nem megfelelőt jelöl meg, az elért pontszám 0.'
+      }
+    ];
+
+    const QUESTIONS = [
+      // ==================== I. ALAPISMERETEK (1-40, 80p) ====================
+      {
+        id: 's1_q1', sec: 'sec1', num: 1,
+        q: 'Mi az első teendő, ha a PC nem indul el az összeszerelés után?',
+        opts: {
+          a: 'Azonnal ki kell cserélni az alaplapot',
+          b: 'A processzor cseréje lehet a megoldás',
+          c: 'Ellenőrizzük az összes csatlakozót, a tápegység működését, és végezzünk CMOS-resetet',
+          d: 'Tisztítsuk meg a ventilátorokat',
+          e: 'Távolítsuk el az összes RAM modult'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's1_q2', sec: 'sec1', num: 2,
+        q: 'Miért fontos az ESD-védelem a PC szét- és összeszerelése során?',
+        opts: {
+          a: 'Megakadályozza, hogy a PC túlmelegedjen',
+          b: 'Megvédi az alkatrészeket a statikus elektromosság okozta károktól',
+          c: 'Csökkenti a zajszintet működés közben',
+          d: 'Megnöveli az alkatrészek élettartamát',
+          e: 'Biztosítja, hogy az összeszerelés gyorsabb legyen'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's1_q3', sec: 'sec1', num: 3,
+        q: 'Milyen problémát jelezhetnek a BIOS hibaüzenetei vagy sípoló hangok a PC indításakor?',
+        opts: {
+          a: 'Az operációs rendszer hiányzik vagy sérült',
+          b: 'Az alaplap meghibásodását',
+          c: 'Hardverproblémák, például RAM, GPU vagy CPU hibák',
+          d: 'A BIOS verziója elavult',
+          e: 'Az USB-eszközök inkompatibilitását'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's1_q4', sec: 'sec1', num: 4,
+        q: 'Mi a feladata a CMOS akkumulátornak az alaplapon?',
+        opts: {
+          a: 'Biztosítja a teljes alaplap tápellátását a kikapcsolt állapotban',
+          b: 'Megőrzi a BIOS beállításait és az időt, amikor a számítógép nincs feszültség alatt',
+          c: 'Feszültséget biztosít a processzornak indításkor',
+          d: 'Tárolja az operációs rendszer indítási konfigurációját',
+          e: 'Segíti a hőmérséklet-érzékelők működését'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's1_q5', sec: 'sec1', num: 5,
+        q: 'Miért fontos a megfelelő kábelkezelés a PC összeszerelésekor?',
+        opts: {
+          a: 'Esztétikai okokból van rá szükség',
+          b: 'Javítja a légáramlást, csökkenti a komponensek hőmérsékletét, és megkönnyíti a karbantartást',
+          c: 'Növeli az alaplapon található csatlakozások számát',
+          d: 'Csökkenti a tápegység fogyasztását'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's1_q6', sec: 'sec1', num: 6,
+        q: 'Mi az IoT (Internet of Things) alapvető célja?',
+        opts: {
+          a: 'Az internethasználat hatékonyságának növelése',
+          b: 'Mobiltelefonok és számítógépek összekapcsolása',
+          c: 'Az eszközök közötti kommunikáció és adatmegosztás automatizálása az interneten keresztül',
+          d: 'Emberi beavatkozás nélküli adattárolás',
+          e: 'Adatbiztonság növelése'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's1_q7', sec: 'sec1', num: 7,
+        q: 'Mit jelent a duplex nyomtatás?',
+        opts: {
+          a: 'Monokróm nyomtatást',
+          b: 'Kétoldalas nyomtatást',
+          c: 'Gyorsított nyomtatási módot',
+          d: 'Nagy méretű dokumentumok nyomtatását',
+          e: 'Színes nyomtatási módot'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's1_q8', sec: 'sec1', num: 8,
+        q: 'Miért fontos az ergonomikus kialakítás a perifériáknál?',
+        opts: {
+          a: 'Csökkenti a kényelmetlenséget és megelőzi a hosszan tartó használat okozta egészségügyi problémákat',
+          b: 'Esztétikai szempontok miatt',
+          c: 'Csökkenti az energiafogyasztást',
+          d: 'Csak a költségek csökkentése érdekében',
+          e: 'Meghosszabbítja az eszköz élettartamát'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's1_q9', sec: 'sec1', num: 9,
+        q: 'Mit jelent a monitorokon az IPS paneltechnológia?',
+        opts: {
+          a: 'Nagyobb felbontást biztosít',
+          b: 'A monitor gyorsabb válaszidejét',
+          c: 'Kiváló színvisszaadást és széles betekintési szöget kínál',
+          d: 'A monitor méretét befolyásolja'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's1_q10', sec: 'sec1', num: 10,
+        q: 'Mire használják a dokkoló állomásokat laptopoknál?',
+        opts: {
+          a: 'A laptop hűtésének javítására',
+          b: 'Az internetkapcsolat biztosítására',
+          c: 'Különböző perifériák, például monitorok, egerek és billentyűzetek stb. csatlakoztatására egyetlen helyen',
+          d: 'A laptop energiatakarékos üzemmódjának aktiválására',
+          e: 'A laptop képernyőjének felnagyítására'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's1_q11', sec: 'sec1', num: 11,
+        q: 'A MBR partíciós séma legfeljebb hány elsődleges partíciót támogat merevlemezenként?',
+        opts: { a: '1', b: '2', c: '4', d: '16', e: '32' },
+        ans: 'c'
+      },
+      {
+        id: 's1_q12', sec: 'sec1', num: 12,
+        q: 'Egy négymagos, Hyper Threading-et támogató processzor hány utasítást tud egyidejűleg elvégezni optimális esetben?',
+        opts: { a: '1', b: '2', c: '4', d: '8', e: '16', f: '32' },
+        ans: 'd'
+      },
+      {
+        id: 's1_q13', sec: 'sec1', num: 13,
+        q: 'RAID 6 esetén mennyi a lemezek minimális száma?',
+        opts: { a: '1', b: '2', c: '3', d: '4', e: '5', f: '6', g: '7' },
+        ans: 'd'
+      },
+      {
+        id: 's1_q14', sec: 'sec1', num: 14,
+        q: 'Milyen színű vezetékpárok cserélődnek meg az 568A és az 568B szabványok sorrendjében?',
+        opts: {
+          a: 'Zöld és kék',
+          b: 'Zöld és narancs',
+          c: 'Zöld és barna',
+          d: 'Kék és zöld',
+          e: 'Kék és narancs'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's1_q15', sec: 'sec1', num: 15,
+        q: 'Milyen színekből épül fel a CMYK színmodell?',
+        opts: {
+          a: 'Cián, Vörös, Sárga, Fekete',
+          b: 'Cián, Bíbor, Sárga, Fekete',
+          c: 'Cián, Vörös, Zöld, Sárga',
+          d: 'Cián, Fekete, Zöld, Sárga'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's1_q16', sec: 'sec1', num: 16,
+        q: 'Az alábbiak közül melyik károkozó program képes sebezhetőségeket kihasználva, felhasználói közreműködés nélkül terjedni?',
+        opts: { a: 'Féreg', b: 'Vírus', c: 'Egyik sem', d: 'Trójai' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q17', sec: 'sec1', num: 17,
+        q: 'Az alábbiak közül melyik félvezető alapú adattároló?',
+        opts: { a: 'CD', b: 'Floppy', c: 'HDD', d: 'SSD', e: 'Mágnes szalag', f: 'DVD' },
+        ans: 'd'
+      },
+      {
+        id: 's1_q18', sec: 'sec1', num: 18,
+        q: 'Az ATX tápegység hány tűs csatlakozóval kapcsolódik az alaplaphoz?',
+        opts: { a: '20 vagy 24', b: '16 vagy 18', c: '20 vagy 22', d: '18 vagy 22', e: '24 vagy 26' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q19', sec: 'sec1', num: 19,
+        q: 'Mit jelent a RISC rövidítés?',
+        opts: {
+          a: 'Csökkentett utasításkészletű architektúra',
+          b: 'Többszálú utasítás végrehajtást támogató architektúra',
+          c: 'Veszélyes kódot tartalmazó program',
+          d: 'Szabványos biztonsági előírások'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's1_q20', sec: 'sec1', num: 20,
+        q: 'Mi NEM igaz az interpretált nyelvekre?',
+        opts: {
+          a: 'Az interpretált nyelvek nem igényelnek fordítást futás előtt',
+          b: 'Az interpretált nyelvek kódját közvetlenül végrehajtja egy futtatókörnyezet',
+          c: 'Az interpretált nyelvek általában gyorsabbak, mint a lefordított nyelvek',
+          d: 'Az interpretált nyelvek nem generálnak köztes fájlokat, mint a lefordított nyelvek',
+          e: 'Az interpretált nyelvek futás közben soronként hajtják végre a kódot'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's1_q21', sec: 'sec1', num: 21,
+        q: 'Egy elektromos berendezés 110 V-os feszültséget igényel és 22 W teljesítményű. Mennyi lesz az áramfelvétel?',
+        opts: { a: '200 mA', b: '100 μA', c: '10 mA', d: '1 mA', e: '1 A' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q22', sec: 'sec1', num: 22,
+        q: 'Melyik alkatrész szolgál egy áramkörben az elektromos energia tárolására?',
+        opts: { a: 'kondenzátor', b: 'tranzisztor', c: 'tekercs', d: 'dióda', e: 'izzó' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q23', sec: 'sec1', num: 23,
+        q: 'Egy 32 bites architektúra esetén mekkora a legnagyobb megcímezhető memória mérete?',
+        opts: { a: '32 GB', b: '4 GB', c: '8 GB', d: '2 GB', e: '16 MB' },
+        ans: 'b'
+      },
+      {
+        id: 's1_q24', sec: 'sec1', num: 24,
+        q: 'Hogy nevezzük a grafikai számításokra kifejlesztett műveletvégző egységet?',
+        opts: { a: 'CPU', b: 'VRAM', c: 'Core', d: 'GPU', e: 'Socket' },
+        ans: 'd'
+      },
+      {
+        id: 's1_q25', sec: 'sec1', num: 25,
+        q: 'Mely típusú csatlakozó NEM alkalmas videójel átvitelére az alábbiakban felsoroltak közül?',
+        opts: { a: 'PS/2', b: 'HDMI', c: 'BNC', d: 'RCA' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q26', sec: 'sec1', num: 26,
+        q: 'Mit jelent a partícionálás egy SSD típusú meghajtó esetében?',
+        opts: {
+          a: 'A partícionálás során egy vagy több különálló logikai tárolóegységet hozunk létre a meghajtón',
+          b: 'A partícionálás során egy vagy több különálló fizikai tárolóegységet hozunk létre a meghajtón',
+          c: 'A partícionálás során új szilárdtest tárolókat alakítunk ki a meghajtón',
+          d: 'A partícionálás az SSD meghajtók fizikai szektorainak manuális átrendezése',
+          e: 'A partícionálás az SSD meghajtók esetében nem engedélyezett'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's1_q27', sec: 'sec1', num: 27,
+        q: 'Mi történik, ha elmaradnak a szoftverfrissítések?',
+        opts: {
+          a: 'Csökken a rendszer védettsége',
+          b: 'Növekszik az eszköz élettartama',
+          c: 'Csökken az eszköz fogyasztása',
+          d: 'Felgyorsul a hálózati kapcsolat',
+          e: 'Csökken a rendszer sebezhetősége'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's1_q28', sec: 'sec1', num: 28,
+        q: 'Mit jelent az informatikai eszközök hardveres karbantartása?',
+        opts: {
+          a1: 'Az eszközök újratelepítése',
+          a2: 'Az összes szoftver frissítése',
+          b: 'A felhasználók továbbképzése',
+          c: 'Az eszközök rendszeres tisztítása',
+          d: 'Az eszközök gyakori cseréje'
+        },
+        optLabels: { a1: 'a', a2: 'a', b: 'b', c: 'c', d: 'd' },
+        ans: 'c'
+      },
+      {
+        id: 's1_q29', sec: 'sec1', num: 29,
+        q: 'Egy 1Mbps átviteli sebességű hálózati kapcsolat 2 perc alatt (maximum) hány bit átvitelére képes?',
+        opts: { a: '960.000', b: '480.000.000', c: '180.000.000', d: '60.000.000', e: '120.000.000' },
+        ans: 'e'
+      },
+      {
+        id: 's1_q30', sec: 'sec1', num: 30,
+        q: 'Hány bájtos egy IPv6-os cím?',
+        opts: { a: '16', b: '128', c: '48', d: '32', e: '4', f: '6' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q31', sec: 'sec1', num: 31,
+        q: 'Hogy nevezzük az olyan hálózatokat, ahol nincs kitüntetett szerver-kliens szerepkör?',
+        opts: { a: 'Peer-to-Peer', b: 'Point-to-Point', c: 'Peer-to-Point', d: 'Point-to-Peer', e: 'Single-to-Single' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q32', sec: 'sec1', num: 32,
+        q: 'Mit csinál a switch, ha olyan keretet kap, amiben a célállomás MAC címe nem szerepel a MAC-cím táblájában?',
+        opts: {
+          a: 'Kiküldi a kapott keretet minden portjára, kivéve azt, amin az bejött',
+          b: 'Automatikusan hozzáadja a MAC címet a táblához, és továbbítja a keretet',
+          c: 'Eldobja a kapott keretet, mert nem tud vele mit kezdeni',
+          d: 'Egy ARP kérést intéz a MAC cím kiderítésére.',
+          e: 'Kiküldi a kapott keretet minden portján'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's1_q33', sec: 'sec1', num: 33,
+        q: 'Melyik biztonsági eszköz figyeli és riasztja a hálózati rendszergazdát az esetleges támadásokról?',
+        opts: { a: 'IDS', b: 'DHCP', c: 'VPN', d: 'DNS', e: 'SSL' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q34', sec: 'sec1', num: 34,
+        q: 'Melyik támadás célja, hogy túlterhelje a hálózatot, és elérhetetlenné tegye a szolgáltatásokat?',
+        opts: { a: 'Man-in-the-Middle', b: 'Denial of Service', c: 'Social Engineering', d: 'Adathalászat', e: 'SQL injection' },
+        ans: 'b'
+      },
+      {
+        id: 's1_q35', sec: 'sec1', num: 35,
+        q: 'Milyen típusú támadás során küld a támadó nagyszámú kérést a szervernek több számítógépről, amelyek különböző földrajzi helyeken találhatók?',
+        opts: { a: 'DDoS támadás', b: 'Ping of Death', c: 'SYN elárasztás', d: 'DNS mérgezés', e: 'DOS támadás' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q36', sec: 'sec1', num: 36,
+        q: 'Az alábbiak közül melyik Git utasítás szolgál a helyi repository távoli helyre másolására?',
+        opts: { a: 'push', b: 'commit', c: 'merge', d: 'fetch', e: 'pull' },
+        ans: 'a'
+      },
+      {
+        id: 's1_q37', sec: 'sec1', num: 37,
+        q: 'Kik regisztrálhatnak felhasználói fiókot a GitHub rendszerébe?',
+        opts: {
+          a: 'Bárki regisztrálhat, aki rendelkezik e-mail címmel',
+          b: 'Csak a Microsoft alkalmazottainak érhető el a szolgáltatás',
+          c: 'Csak a nyílt forráskódú programokat fejlesztők számára érhető el a regisztráció',
+          d: 'Csak céges e-mail címmel rendelkező fejlesztők regisztrálhatnak'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's1_q38', sec: 'sec1', num: 38,
+        q: 'Melyik állítás NEM igaz a Near Field Communication-nel (NFC) kapcsolatosan?',
+        opts: {
+          a: 'Az NFC különféle szabványok összessége',
+          b: 'Kis hatótávolságú, két irányú kommunikációt tesz lehetővé',
+          c: 'Optikai kábelen valósul meg a kommunikáció',
+          d: 'Az NFC egy vezeték nélküli technológia'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's1_q39', sec: 'sec1', num: 39,
+        q: 'Melyik három fogalom jellemzi egy projekt „hármas sikerkritériumát”, melyet projektháromszögnek is neveznek?',
+        opts: {
+          a: 'Idő - Költség - Terjedelem',
+          b: 'Idő - Költség - Minőség',
+          c: 'Kockázat - Kommunikáció - Motiváció',
+          d: 'Kockázat - Kommunikáció - Költség',
+          e: 'Idő - Minőség – Erőforrás',
+          f: 'Idő - Minőség – Kockázat'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's1_q40', sec: 'sec1', num: 40,
+        q: 'Egy projekt tervezése-ellenőrzése-végrehajtása során melyik diagram használata ajánlott?',
+        opts: { a: 'Gantt diagram', b: 'Oszlop diagram', c: 'Torta diagram', d: 'Idő – vonal diagram' },
+        ans: 'a'
+      },
+
+      // ==================== II. HÁLÓZATOK (1-60, 120p) ====================
+      {
+        id: 's2_q1', sec: 'sec2', num: 1,
+        q: 'Az alábbiak közül milyen előnye van az IPv6 címzésnek az IPv4 címzéssel szemben?',
+        opts: {
+          a: 'Korlátozások nélkül megoldható a végponttól végpontig való címzés',
+          b: 'Rövidebb címekkel dolgozik',
+          c: 'Nem bontja a címet hálózat és állomás azonosító részre',
+          d: 'Régebbi eszközökön is elérhető'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q2', sec: 'sec2', num: 2,
+        q: 'Melyik a legmodernebb IEEE 802.11 szabvány, mely jelenleg a kereskedelemben kapható?',
+        opts: { a: '5', b: '6', c: '7', d: '8' },
+        ans: 'c'
+      },
+      {
+        id: 's2_q3', sec: 'sec2', num: 3,
+        q: 'Az alábbiak közül milyen frekvencián NEM működik WiFi szabvány?',
+        opts: { a: '2,4 GHz', b: '5 GHz', c: '6 GHz', d: '7 GHz' },
+        ans: 'd'
+      },
+      {
+        id: 's2_q4', sec: 'sec2', num: 4,
+        q: 'Cisco forgalomirányítók milyen adminisztratív távolsággal veszik fel a statikus útvonalakat (amennyiben azt külön nem állítottuk be)?',
+        opts: { a: '0', b: '1', c: '10', d: 'Mindenképpen be kell állítani' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q5', sec: 'sec2', num: 5,
+        q: 'Melyik DHCP opció adja a DNS szerverek címeit a kliensek számára?',
+        opts: { a: '4', b: '5', c: '6', d: '7' },
+        ans: 'c'
+      },
+      {
+        id: 's2_q6', sec: 'sec2', num: 6,
+        q: 'Az alábbiak közül melyik állítás igaz az SNMP protokollra?',
+        opts: {
+          a: 'Adott eszközről állapot információkat lehet lekérni a protokoll használatával egy monitorozó program által',
+          b: 'Segítségével az eszközök folyamatosan állapotinformációkat küldenek egy központi tárolóba',
+          c: 'Hálózati hitelesítésre szolgál',
+          d: 'Csak hálózati nyomtatókon elérhető'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q7', sec: 'sec2', num: 7,
+        q: 'Melyik elem NEM része a második rétegbeli redundancia megvalósításának?',
+        opts: { a: 'Kapcsoló', b: 'STP protokoll', c: 'Forgalomirányító', d: 'Hálózati kábelek' },
+        ans: 'c'
+      },
+      {
+        id: 's2_q8', sec: 'sec2', num: 8,
+        q: 'Milyen üzeneteket küld az STP protokoll?',
+        opts: { a: 'BPDU', b: 'ARP', c: 'ICMP', d: 'HTTP', e: 'IP' },
+        ans: 'a'
+      },
+      {
+        id: 's2_q9', sec: 'sec2', num: 9,
+        q: 'Melyik eszköz rendelkezik a legkisebb Bridge ID-vel az STP-ben?',
+        opts: { a: 'Backup Bridge', b: 'Root Bridge', c: 'Master Bridge', d: 'Central Bridge' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q10', sec: 'sec2', num: 10,
+        q: 'Mi történik egy porttal az STP-ben, ha blokkolt állapotba kerül?',
+        opts: {
+          a: 'Semmilyen forgalmat nem enged át',
+          b: 'Minden forgalmat átenged',
+          c: 'Csak a natív VLAN forgalmát engedi át',
+          d: 'Csak STP üzeneteket enged át'
+        },
+        ans: 'd'
+      },
+      {
+        id: 's2_q11', sec: 'sec2', num: 11,
+        q: 'Mi a „deny” művelet eredménye egy hozzáférési listában?',
+        opts: {
+          a: 'Az adott forgalom engedélyezése',
+          b: 'Az adott forgalom elutasítása',
+          c: 'A hozzáférési lista letiltása',
+          d: 'Az összes forgalom engedélyezése'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q12', sec: 'sec2', num: 12,
+        q: 'Egy IPv4-es cím első oktettje 10000000. Milyen osztályú ez a cím?',
+        opts: { a: 'A', b: 'B', c: 'C', d: 'D', e: 'E' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q13', sec: 'sec2', num: 13,
+        q: 'Mi a honeypot hálózat?',
+        opts: {
+          a: 'Egy modern eszközökből álló hálózat a hálózati forgalom gyorsítása érdekében',
+          b: 'Egy szándékosan sebezhetőre létrehozott hálózat, hogy támadókat vonzzon és tanulmányozzon',
+          c: 'A hálózati forgalom titkosításírásra kifejlesztett megoldás',
+          d: 'A teszt jelleggel létrehozott hálózatokat nevezik így'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q14', sec: 'sec2', num: 14,
+        q: 'Milyen algoritmust használ az OSPF protokoll?',
+        opts: { a: 'Csillag topológia algoritmus', b: 'Dijkstra algoritmus', c: 'Bellman-Ford algoritmus', d: 'Token-ring algoritmus' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q15', sec: 'sec2', num: 15,
+        q: 'Melyik támadás használja ki az elavult operációs rendszereket vagy alkalmazásokat?',
+        opts: { a: 'Adathalászat', b: 'Exploit', c: 'DDoS támadás', d: 'Man-in-the-middle támadás' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q16', sec: 'sec2', num: 16,
+        q: 'Mi a célja a BGP (Border Gateway Protocol) protokollnak?',
+        opts: {
+          a: 'Helyi hálózatokon belüli útvonalak konfigurálása',
+          b: 'Autonóm rendszerek közötti útvonalak irányítása az interneten',
+          c: 'Switch-ek beállítása',
+          d: 'Wi-Fi hálózatok biztonságának növelése'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q17', sec: 'sec2', num: 17,
+        q: 'Nagy hálózatok hierarchikus felosztására melyik protokoll támogatja az "area"-kat?',
+        opts: { a: 'RIP', b: 'ARP', c: 'EIGRP', d: 'OSPF' },
+        ans: 'd'
+      },
+      {
+        id: 's2_q18', sec: 'sec2', num: 18,
+        q: 'Dinamikus útválasztás esetén mit jelent a konvergencia?',
+        opts: {
+          a: 'Azt az esetet, amikor a routerek leállnak',
+          b: 'Amikor minden router rendelkezik a hálózat legfrissebb útválasztási információival',
+          c: 'Amikor a hálózati forgalom megduplázódik',
+          d: 'Az az eset, amikor az összes útvonal eltávolításra kerül'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q19', sec: 'sec2', num: 19,
+        q: 'Melyik esetben előnyös a statikus NAT használata?',
+        opts: {
+          a: 'Amikor kívülről egy fix IP-címről egy szerver állandóan elérhető kell, hogy legyen',
+          b: 'Amikor a hálózat nagy forgalmat generál',
+          c: 'Amikor egy router több hálózatot kezel',
+          d: 'Amikor osztályos címeket kell használni'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q20', sec: 'sec2', num: 20,
+        q: 'Mi jelent a VLAN fogalma?',
+        opts: {
+          a: 'Egyszerű lokális hálózat',
+          b: 'Vezeték nélküli hálózat',
+          c: 'Logikailag elkülönített hálózat egy fizikai hálózaton',
+          d: 'Videóhívásra használt hálózat'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q21', sec: 'sec2', num: 21,
+        q: 'Melyik hálózati eszköz szükséges a VLAN-ok közti forgalomirányításhoz?',
+        opts: {
+          a: 'Második rétegbeli kapcsoló',
+          b: 'Access Point',
+          c: 'Forgalomirányító vagy harmadik rétegbeli kapcsoló',
+          d: 'HUB'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q22', sec: 'sec2', num: 22,
+        q: 'Egy kapcsoló milyen VLAN ID-t fog rendelni a natív VLAN keretei számára 802.1Q beágyazás használata esetén?',
+        opts: {
+          a: '0',
+          b: '1',
+          c: '99',
+          d: 'Amit megadunk',
+          e: 'Nem rendel hozzá semmit ebben az esetben'
+        },
+        ans: 'e'
+      },
+      {
+        id: 's2_q23', sec: 'sec2', num: 23,
+        q: 'VLAN környezet esetén mi a szerepe a „trunk” portnak?',
+        opts: {
+          a: 'A forgalom titkosítása',
+          b: 'Több VLAN forgalmát továbbítja egy porton keresztül',
+          c: 'A forgalom szűrése',
+          d: 'A sebesség növelése'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q24', sec: 'sec2', num: 24,
+        q: 'Mi a „VLAN hopping”?',
+        opts: {
+          a: 'Egy olyan támadás, amelynek során a támadó hozzáférhet egy másik VLAN forgalmához',
+          b: 'A VLAN-ok közti adatcsere gyorsítása',
+          c: 'Egy módszer a VLAN-ok eltávolítására',
+          d: 'Egy technika a VLAN-ok összekapcsolására'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q25', sec: 'sec2', num: 25,
+        q: 'Hogyan lehet megakadályozni, hogy egy eszköz hozzáférjen egy másik VLAN-hoz?',
+        opts: {
+          a: 'Az IP-címek manuális kiosztásával',
+          b: 'A VLAN-ok közti forgalomirányítás korlátozásával',
+          c: 'Trunk portok használatával',
+          d: 'A switch beállításainak megváltoztatásával'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q26', sec: 'sec2', num: 26,
+        q: 'Melyik parancsot kell kiadni Cisco forgalomirányító interfészén, hogy a beérkező DHCP üzeneteket továbbítsa a DHCP szerver felé?',
+        opts: { a: 'ip dhcp-server', b: 'ip helper-address', c: 'ip dhcp-relay', d: 'ip dhcp' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q27', sec: 'sec2', num: 27,
+        q: 'Mi a VTP szerepe?',
+        opts: {
+          a: 'IP-címek kiosztása a VLAN-ban',
+          b: 'VLAN-ok titkosítása',
+          c: 'A forgalom gyorsítása a VLAN-ok között',
+          d: 'Trunk portok automatikus konfigurációja',
+          e: 'A VLAN konfigurációk automatikus terjesztése a kapcsolók között'
+        },
+        ans: 'e'
+      },
+      {
+        id: 's2_q28', sec: 'sec2', num: 28,
+        q: 'Milyen szolgáltatás a GRE protokoll?',
+        opts: { a: 'VPN', b: 'Menedzsment', c: 'Fájlcserélő', d: 'Idő szinkronizáló' },
+        ans: 'a'
+      },
+      {
+        id: 's2_q29', sec: 'sec2', num: 29,
+        q: 'Mi történik Cisco kapcsoló használata esetén, ha egy portot olyan VLAN-hoz rendelünk, amely az adatbázisban nem létezik?',
+        opts: {
+          a: 'Nem lesz hatása, hibaüzenetet kapunk',
+          b: 'A VLAN automatikusan létrejön',
+          c: 'Letiltja a portot',
+          d: 'Hozzárendeli, de az nem fog működni'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q30', sec: 'sec2', num: 30,
+        q: 'Hány darab kiosztható IPv4 cím van egy 255.255.128.0 alhálózati maszkkal rendelkező hálózaton?',
+        opts: { a: '2¹⁷ - 2', b: '2¹⁷', c: '2¹⁵ - 2', d: '2¹⁵' },
+        ans: 'c'
+      },
+      {
+        id: 's2_q31', sec: 'sec2', num: 31,
+        q: 'Az alábbiak közül melyik NEM lehet alhálózati maszk?',
+        opts: {
+          a: '255.128.0.0',
+          b: '255.255.192.0',
+          c: '255.255.0.0',
+          d: '255.255.254.0',
+          e: '255.255.168.0',
+          f: '255.240.0.0'
+        },
+        ans: 'e'
+      },
+      {
+        id: 's2_q32', sec: 'sec2', num: 32,
+        q: 'Mi történik, ha egy ACL végén nem szerepel engedélyezési szabály?',
+        opts: {
+          a: 'A lista nem fog működni, minden forgalom tiltva lesz',
+          b: 'Minden más forgalom tiltva lesz',
+          c: 'Minden más forgalom engedélyezve lesz',
+          d: 'Ilyen eset nem fordulhat elő, ez magától ott van mindig a lista végén'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q33', sec: 'sec2', num: 33,
+        q: 'Miért fontos az ACL bejegyzések sorrendje?',
+        opts: {
+          a: 'Hatékonyabban lehessen kezelni az IP-címeket',
+          b: 'Mert az ACL szabályai sorrendben kerülnek feldolgozásra, és az első megfelelő szabály érvényesül',
+          c: 'Azért, hogy gyorsuljon a hálózati forgalom',
+          d: 'Mert ez eredményezi az ACL feldolgozások sebességének optimalizálását, optimalizálás nélkül nincs feldolgozás'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q34', sec: 'sec2', num: 34,
+        q: 'Windows operációs rendszerben melyik parancs szolgál az adapterek IP cím bérletének visszaadására?',
+        opts: { a: 'ipconfig /release', b: 'ipconfig /stop', c: 'ipconfig /renew', d: 'ipconfig /giveback' },
+        ans: 'a'
+      },
+      {
+        id: 's2_q35', sec: 'sec2', num: 35,
+        q: 'PAT használata esetén melyik megoldás használatos arra, hogy egy adott belső eszköz szolgáltatása (de csak az) elérhető legyen „kívülről”?',
+        opts: { a: 'DMZ', b: 'Statikus NAT', c: 'Nincs erre lehetőség', d: 'Port átirányítás', e: 'DHCP' },
+        ans: 'd'
+      },
+      {
+        id: 's2_q36', sec: 'sec2', num: 36,
+        q: 'Melyik IPv4-es címosztályban találhatóak a csoportos címzésre használatos címek?',
+        opts: {
+          a: 'A',
+          b: 'B',
+          c: 'C',
+          d: 'D',
+          e: 'E',
+          f: 'F',
+          g: 'Nem csak egy, hanem több osztályban is.'
+        },
+        ans: 'd'
+      },
+      {
+        id: 's2_q37', sec: 'sec2', num: 37,
+        q: 'Az alábbiak közül melyik funkció NEM található meg az SSH protokollban?',
+        opts: {
+          a: 'Távoli konzol hozzáférés',
+          b: 'Titkosított kommunikáció',
+          c: 'Távoli grafikus hozzáférés',
+          d: 'Fájlátvitel',
+          e: 'Tunneling'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q38', sec: 'sec2', num: 38,
+        q: 'Mit rövidít a VLSM?',
+        opts: {
+          a: 'Variable Length Standard Mask',
+          b: 'Virtual Local Subnet Management',
+          c: 'Variable Logical Subnet Method',
+          d: 'Variable Length Subnet Mask'
+        },
+        ans: 'd'
+      },
+      {
+        id: 's2_q39', sec: 'sec2', num: 39,
+        q: 'Melyik üzenettel kezdi egy állomás a DHCP címbérletének hosszabbítását?',
+        opts: { a: 'DHCPDISCOVER', b: 'DHCPINFORM', c: 'DHCPACK', d: 'DHCPREQUEST', e: 'DHCPRENEW' },
+        ans: 'd'
+      },
+      {
+        id: 's2_q40', sec: 'sec2', num: 40,
+        q: 'Melyik VLAN-ok engedélyezettek Cisco kapcsolón egy trönk kapcsolaton alapértelmezés szerint?',
+        opts: {
+          a: 'Csak a VLAN 1 engedélyezett',
+          b: 'Bármilyen VLAN engedélyezett',
+          c: 'Az összes adatbázisban szereplő VLAN engedélyezett',
+          d: 'Csak a natív VLAN engedélyezett',
+          e: 'Egyik VLAN sem engedélyezett'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q41', sec: 'sec2', num: 41,
+        q: 'Hány szórási tartományt képez egy kapcsolóból és a hozzá csatlakoztatott 4 darab PC-ből álló hálózat?',
+        opts: { a: '0', b: '1', c: '4', d: '5' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q42', sec: 'sec2', num: 42,
+        q: 'Milyen hálózattípus esetén alakít ki az OSPF szomszédsági viszonyt, anélkül, hogy DR-t, illetve BDR-t választana?',
+        opts: {
+          a: 'Pont-pont hálózat esetén',
+          b: 'Szórásos többeshozzáférésű hálózat esetén',
+          c: 'A backbone területen',
+          d: 'Virtuális hálózat esetén'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q43', sec: 'sec2', num: 43,
+        q: 'Miért fontos a hálózat konfigurálásának automatizációja?',
+        opts: {
+          a: 'A hálózati eszközök biztonságának növelése érdekében',
+          b: 'Csak a forgalom titkosítása miatt',
+          c: 'A hálózati adminisztráció és karbantartás egyszerűsítése, valamint a hibák csökkentése miatt',
+          d: 'Az IP-címek dinamikus kiosztása érdekében'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q44', sec: 'sec2', num: 44,
+        q: 'Mi a YAML?',
+        opts: {
+          a: 'Konfigurációs fájlok meghatározására használt egyszerű adatstruktúra',
+          b: 'VLAN-ok automatikus kiosztására szolgáló protokoll',
+          c: 'Adatátviteli protokoll',
+          d: 'Dokumentumleíró nyelv'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q45', sec: 'sec2', num: 45,
+        q: 'Mi az API-k szerepe a hálózat automatizációban?',
+        opts: {
+          a: 'A forgalom vezérlését végzik el',
+          b: 'Lehetővé teszik az eszközök közötti kommunikációt és automatizált vezérlést szoftveres megoldásokkal',
+          c: 'Csak a VLAN-ok konfigurálására szolgálnak',
+          d: 'Az IP-címek automatikus kiosztására használatosak'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q46', sec: 'sec2', num: 46,
+        q: 'Mi a VRRP szerepe?',
+        opts: {
+          a: 'Redundáns forgalomirányítók konfigurálása, hogy a hálózat ne legyen kiesésükre érzékeny',
+          b: 'Az IP-címek gyors kiosztása',
+          c: 'Virtuális forgalomirányítás megvalósítása',
+          d: 'Eszközök automatikus konfigurációjának létrehozására szolgál'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q47', sec: 'sec2', num: 47,
+        q: 'Az alábbiakban szereplő protokollok közül melyik képes két kapcsoló közötti EtherChannel kapcsolat kialakítására?',
+        opts: { a: 'LACP', b: 'NTP', c: 'LADP', d: 'NFS' },
+        ans: 'a'
+      },
+      {
+        id: 's2_q48', sec: 'sec2', num: 48,
+        q: 'OSPFv3 konfigurálása esetén melyik esetben kell mindenképpen router ID-t beállítani?',
+        opts: {
+          a: 'Minden esetben be kell állítani',
+          b: 'Amennyiben csak IPv6-ot használunk, és IPv4-et egyáltalán nem',
+          c: 'Manuálisan be sem állítható, mindig automatikusan kerül kiválasztásra',
+          d: 'Többes hozzáférésű hálózatok esetén'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q49', sec: 'sec2', num: 49,
+        q: 'Kiterjesztett hozzáférési listák létrehozása-alkalmazása esetén az általános szabályt figyelembevéve, hol kell elhelyezni a megfelelő utasításokat?',
+        opts: {
+          a: 'A forráshoz legközelebb',
+          b: 'A hálózat legszűkebb pontján',
+          c: 'A célhoz legközelebb',
+          d: 'Az internetkapcsolat megosztását végző forgalomirányítón'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's2_q50', sec: 'sec2', num: 50,
+        q: 'Egy hálózati kártya MAC címe hexadecimálisan: 49:82:3c:fe:87:1e. Az alábbiak közül melyik a bináris megfelelője?',
+        opts: {
+          a: '0100 1001 1000 0010 0010 1100 1111 1110 1000 0111 0001 1110',
+          b: '0100 1001 1000 0010 0011 1100 1111 1110 1000 0111 0001 1110',
+          c: '0100 1001 1000 0010 0011 1100 1111 1110 1000 0111 0001 1111',
+          d: '1100 1001 1000 0010 0011 1100 1111 1110 1000 0111 0001 1110'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's2_q51', sec: 'sec2', num: 51,
+        q: 'Az alábbi MAC című hálózati interfészek közül melyiket NEM ugyanaz a gyártó gyártotta, mint a többit?',
+        opts: {
+          a: '06:c8:13:71:b3:a4',
+          b: '06:c8:13:cb:17:53',
+          c: 'af:39:f3:cb:17:53',
+          d: 'Mindegyiket ugyanaz gyártotta',
+          e: 'Ezen információk alapján, ezt nem lehet eldönteni'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q52', sec: 'sec2', num: 52,
+        q: 'Mi a szerepe a rétegezett hálózati architektúrának egy komplex hálózat tervezésekor?',
+        opts: {
+          a: 'A sebesség növelése',
+          b: 'Az eszközök fizikai elhelyezésének tervezése',
+          c: 'A hálózat különböző funkcionális rétegekbe szervezése a skálázhatóság, a teljesítmény és a hibamentesség érdekében',
+          d: 'A hálózati forgalom többrétű titkosításának alkalmazása'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q53', sec: 'sec2', num: 53,
+        q: 'Az alábbiak közül melyik 2,4 GHz-es WiFi csatornák használata ajánlott, ha egy területen több access point-ot is kihelyeztek?',
+        opts: { a: '1, 6, 10', b: '1, 5, 11', c: '1, 6, 11', d: '1, 5, 10' },
+        ans: 'c'
+      },
+      {
+        id: 's2_q54', sec: 'sec2', num: 54,
+        q: 'Milyen kábelt kell használni egy forgalomirányító „sávon kívüli” konfigurálásához?',
+        opts: { a: 'Egyenes kötésű kábel', b: 'Keresztkötésű kábel', c: 'Konzolkábel', d: 'Optikai kábel' },
+        ans: 'c'
+      },
+      {
+        id: 's2_q55', sec: 'sec2', num: 55,
+        q: 'Egy forgalomirányító újraindítása esetén mely információk törlődnek az eszközről?',
+        opts: {
+          a: 'Az interfészek címei',
+          b: 'A globális konfigurációk',
+          c: 'Az irányítótábla',
+          d: 'Az OSPF konfigurációja'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's2_q56', sec: 'sec2', num: 56,
+        q: 'Hány alhálózatot tudunk létrehozni, ha az alhálózati maszkot /24-ről /27-re növeljük?',
+        opts: { a: '1', b: '2', c: '4', d: '8', e: '16' },
+        ans: 'd'
+      },
+      {
+        id: 's2_q57', sec: 'sec2', num: 57,
+        q: 'Melyik fogalom köthető az alábbiak közül az EUI-64-hez?',
+        opts: { a: 'IPv4 cím', b: 'Fizikai cím', c: 'A szolgáltatótól kapott IPv6 prefix', d: 'SSID' },
+        ans: 'b'
+      },
+      {
+        id: 's2_q58', sec: 'sec2', num: 58,
+        q: 'A TCP protokoll melyik tulajdonsága valósít meg adatfolyamvezérlést?',
+        opts: { a: 'Ablakozás', b: 'Háromfázisú kézfogás', c: 'Ütközésdetektálás', d: 'Portszámok használata' },
+        ans: 'a'
+      },
+      {
+        id: 's2_q59', sec: 'sec2', num: 59,
+        q: 'Melyik TCP/IP modell réteg felel meg az OSI felső három rétegének?',
+        opts: { a: 'Alkalmazási', b: 'Megjelenítési', c: 'Viszony', d: 'Internet' },
+        ans: 'a'
+      },
+      {
+        id: 's2_q60', sec: 'sec2', num: 60,
+        q: 'Milyen üzenet segítségével hirdeti magát egy WiFi AP?',
+        opts: { a: 'beacon', b: 'signal', c: 'ping', d: 'hello' },
+        ans: 'a'
+      },
+
+      // ==================== III. HÁLÓZATI OPERÁCIÓS RENDSZEREK (1-28, 60p) ====================
+      {
+        id: 's3_q1', sec: 'sec3', sub: 'Windows', num: 1,
+        q: 'Milyen nevű csoporthoz tartoznak a rendszergazda jogosultsággal rendelkező felhasználók Windows-on?',
+        opts: { a: 'roots', b: 'Admins', c: 'Administrators', d: 'Nincs erre külön csoport' },
+        ans: 'c'
+      },
+      {
+        id: 's3_q2', sec: 'sec3', sub: 'Windows', num: 2,
+        q: 'Milyen RAID megoldás NEM valósítható meg a Windows Lemezkezelő segítségével?',
+        opts: { a: 'RAID 0', b: 'RAID 1', c: 'RAID 5', d: 'RAID 6' },
+        ans: 'd'
+      },
+      {
+        id: 's3_q3', sec: 'sec3', sub: 'Windows', num: 3,
+        q: 'Mi a Microsoft legújabb fájlrendszerének neve?',
+        opts: { a: 'FAT64', b: 'NTFS', c: 'ReFS', d: 'NTFS+', e: 'exFAT' },
+        ans: 'c'
+      },
+      {
+        id: 's3_q4', sec: 'sec3', sub: 'Windows', num: 4,
+        q: 'Windows Server DHCP szolgáltatásában milyen tartományból foglalható le cím egy kliens számára?',
+        opts: {
+          a: 'A scope által kezelt címek közül',
+          b: 'A scope által kezelt, de kizárt címek közül',
+          c: 'A scope által nem kezelt címek közül',
+          d: 'Mind a három válasznál említett tartományból foglalható cím'
+        },
+        ans: 'd'
+      },
+      {
+        id: 's3_q5', sec: 'sec3', sub: 'Windows', num: 5,
+        q: 'Windows operációs rendszer esetén melyik parancs alkalmazása szükséges a hálózati adapterek beállításához?',
+        opts: { a: 'ncpa.cpl', b: 'interfaces.cpl', c: 'netconf.cpl', d: 'nsc.cpl' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q6', sec: 'sec3', sub: 'Windows', num: 6,
+        q: 'Windows Server esetén mi az RODC?',
+        opts: {
+          a: 'Csak olvasható tartományvezérlő',
+          b: 'Olyan tartományvezérlő, amely offline másolatként szolgál',
+          c: 'Az elsődleges tartományvezérlőt nevezik így',
+          d: 'A visszafelé kompatibilitásért felelős tartományvezérlő'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's3_q7', sec: 'sec3', sub: 'Windows', num: 7,
+        q: 'Windows Server esetén csoportházirenddel az alábbiak közül melyik feladat nem valósítható meg?',
+        opts: {
+          a: 'A felhasználó háttérképének megváltoztatása',
+          b: 'Registry beállítások módosítása',
+          c: 'Hálózati meghajtók csatolása',
+          d: 'BIOS beállítások módosítása'
+        },
+        ans: 'd'
+      },
+      {
+        id: 's3_q8', sec: 'sec3', sub: 'Windows', num: 8,
+        q: 'Windows Server esetén mi a PowerShell szkriptek kiterjesztése?',
+        opts: { a: '.ps', b: '.power2', c: '.ps1', d: '.sh' },
+        ans: 'c'
+      },
+      {
+        id: 's3_q9', sec: 'sec3', sub: 'Windows', num: 9,
+        q: 'Melyik állítás NEM igaz az MMC-re Windows Server esetén?',
+        opts: {
+          a: 'Külön kell telepíteni',
+          b: 'Tetszőleges módon hozzáadhatunk modulokat, saját nézetet alakíthatunk ki',
+          c: 'Fa struktúrát használ',
+          d: 'Csak a helyi rendszert lehet vele menedzselni'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's3_q10', sec: 'sec3', sub: 'Windows', num: 10,
+        q: 'Melyik parancs szolgál a Csoportházirend Objektumok szerverről való frissítésre? (Windows Server esetén)',
+        opts: { a: 'gpoupdate', b: 'gpupdate', c: 'gpup', d: 'gpoup' },
+        ans: 'b'
+      },
+      {
+        id: 's3_q11', sec: 'sec3', sub: 'Windows', num: 11,
+        q: 'Alapértelmezés szerint az IIS hol tárolja a „Default Website” gyökérmappáját? (Windows Server esetén)',
+        opts: {
+          a: 'C:\\inetpub\\wwwroot',
+          b: 'C:\\inetpub\\www',
+          c: 'C:\\inetpub\\public_html',
+          d: 'C:\\inetpub\\html'
+        },
+        ans: 'a'
+      },
+      {
+        id: 's3_q12', sec: 'sec3', sub: 'Windows', num: 12,
+        q: 'Kollégája egy Windows klienst szeretne tartományba léptetni, de a képen látható hibaüzenetet kapta. Az alábbi lehetőségek közül melyik hiba vezethetett ehhez az üzenethez?',
+        hasDialogIllustration: true,
+        opts: {
+          a: 'A Windows verziója nem támogatja a tartományhoz való csatlakozást',
+          b: 'Hibás a DNS szerver beállítása a kliensen',
+          c: 'A tartományhoz több eszköz már nem csatlakoztatható',
+          d: 'Nincs az adott felhasználónak joga csatlakozni a tartományhoz'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's3_q13', sec: 'sec3', sub: 'Windows', num: 13,
+        q: 'Milyen objektumokat NEM kezel az Active Directory Windows Server esetén?',
+        opts: { a: 'Felhasználó fiókok', b: 'Számítógépek', c: 'Csoportok', d: 'Hálózati adapterek' },
+        ans: 'd'
+      },
+      {
+        id: 's3_q14', sec: 'sec3', sub: 'Windows', num: 14,
+        q: 'Melyik funkció NEM része a Windows Server Backup-nak?',
+        opts: {
+          a: 'Teljes rendszerkép mentése',
+          b: 'Fájlok egyesével való visszaállítása',
+          c: 'Automatikus frissítések letöltése',
+          d: 'Ütemezett mentések beállítása'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's3_q15', sec: 'sec3', sub: 'Windows', num: 15,
+        q: 'Melyik PowerShell parancsot használhatjuk egy új felhasználói fiók létrehozására Windows Server esetén?',
+        opts: { a: 'New-User', b: 'Add-User', c: 'New-ADUser', d: 'Create-User' },
+        ans: 'c'
+      },
+
+      // Linux (16-28)
+      {
+        id: 's3_q16', sec: 'sec3', sub: 'Linux', num: 16,
+        q: 'Linux esetén az alábbiakban felsoroltak közül melyik tűzfal program? (2 helyes megoldás)',
+        multi: true,
+        points: 4,
+        opts: { a: 'ufw', b: 'ZoneAlarmX', c: 'ClearOS', d: 'UltimateFW' },
+        ans: ['a', 'c']
+      },
+      {
+        id: 's3_q17', sec: 'sec3', sub: 'Linux', num: 17,
+        q: 'Linux esetén mi a neve a bash (futtatható) állományok bevezető, első sorának?',
+        opts: { a: 'shebang', b: 'sebing', c: 'bashshell', d: 'shellbash' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q18', sec: 'sec3', sub: 'Linux', num: 18,
+        q: 'Linux esetén milyen konzolparancsot használna, hogy egy fájlt mindenki számára elérhetővé tegyen?',
+        opts: { a: 'sudo chmod 777', b: 'sudo chmod –r', c: 'chmod 770', d: 'sodo chmod 704' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q19', sec: 'sec3', sub: 'Linux', num: 19,
+        q: 'Linux esetén milyen konzolparancsot használna, hogy futtatási jogot adjon egy fájlnak?',
+        opts: { a: 'sudo chmod +x', b: 'sudo chnmod xxx', c: 'sudo chmod x-x', d: 'sudo chmod +++' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q20', sec: 'sec3', sub: 'Linux', num: 20,
+        q: 'Milyen joker karakterrel helyettesíthet egy karaktert a fájlnévben?',
+        opts: { a: '„?”', b: '„_”', c: '„ „ (szóköz karakter)', d: '„#”' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q21', sec: 'sec3', sub: 'Linux', num: 21,
+        q: 'Milyen konzolparancsot kell használni, hogy a csomaglisták frissüljenek? (2 helyes válasz)',
+        multi: true,
+        points: 4,
+        opts: {
+          a: 'sudo apt update',
+          b: 'sudo apt upgrade',
+          c: 'sudo apt_get update && upgrade',
+          d: 'sudo apt update && upgrade'
+        },
+        ans: ['a', 'd']
+      },
+      {
+        id: 's3_q22', sec: 'sec3', sub: 'Linux', num: 22,
+        q: 'Melyik „joker” karakterrel helyettesíthet egy fájlnevet?',
+        opts: { a: '„*”', b: '„?”', c: '„_”', d: '„#”' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q23', sec: 'sec3', sub: 'Linux', num: 23,
+        q: 'Linux esetén az Apache telepítése után melyik mappába kerül alapértelmezetten az index.html fájl?',
+        opts: { a: '/var/www/html/', b: '/bin/html/', c: '/var/html', d: '/etc/www/html' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q24', sec: 'sec3', sub: 'Linux', num: 24,
+        q: 'Linux esetén az Apache telepítése után – alapértelmezetten - melyik porton szolgáltat a szerver?',
+        opts: { a: '80', b: '25', c: '8080', d: '110' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q25', sec: 'sec3', sub: 'Linux', num: 25,
+        q: 'Linux rendszerben általában melyik mappában találjuk meg egy csatlakoztatott pendrive tartalmát?',
+        opts: { a: '/mnt/', b: '/bin/', c: '/etc/', d: '/var/' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q26', sec: 'sec3', sub: 'Linux', num: 26,
+        q: 'Milyen beépített rendszereszközzel lehet időzíteni egy .sh fájl futását Linux esetén?',
+        opts: { a: 'cron', b: 'timestart', c: 'run_start', d: 'cronX' },
+        ans: 'a'
+      },
+      {
+        id: 's3_q27', sec: 'sec3', sub: 'Linux', num: 27,
+        q: 'Linux esetén milyen kiegészítő csomag telepítése után képes az apache szerver oldali programok futtatására?',
+        opts: { e: 'PHP', f: 'Java', g: 'JS', h: 'JS runtime' },
+        ans: 'e'
+      },
+      {
+        id: 's3_q28', sec: 'sec3', sub: 'Linux', num: 28,
+        q: 'A felsoroltak közül melyik egy karakteres üzemmódú fájlkezelő program?',
+        opts: {
+          a: 'midnight commander (mc)',
+          b: 'Norton commander (nc)',
+          c: 'D Navigator (dn)',
+          d: 'L commander (lc)'
+        },
+        ans: 'a'
+      },
+
+      // ==================== IV. FELHŐSZOLGÁLTATÁSOK (1-20, 40p) ====================
+      {
+        id: 's4_q1', sec: 'sec4', num: 1,
+        q: 'Melyik felhőszolgáltatás példája a Google Drive?',
+        opts: { a: 'IaaS', b: 'PaaS', c: 'SaaS', d: 'DaaS' },
+        ans: 'c'
+      },
+      {
+        id: 's4_q2', sec: 'sec4', num: 2,
+        q: 'Mi az OpenStack?',
+        opts: {
+          a: 'Egy felhőszolgáltató',
+          b: 'Egy nyílt forráskódú felhő platform',
+          c: 'Egy adatbázis-kezelő rendszer',
+          d: 'Egy adatmentési szolgáltatás'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q3', sec: 'sec4', num: 3,
+        q: 'Mit jelent a "pay-as-you-go" modell?',
+        opts: {
+          a: 'Egy fix díjas szolgáltatás',
+          b: 'Az igények szerint történő fizetés',
+          c: 'Előre kifizetett rendszer',
+          d: 'Hosszú távú szerződéses modell'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q4', sec: 'sec4', num: 4,
+        q: 'Mi a konténerek szerepe a felhőszolgáltatásokban?',
+        opts: {
+          a: 'Virtuális gépek logikai csoportosítása',
+          b: 'Az alkalmazások izolálása és hordozhatóságának növelése',
+          c: 'Biztonsági mentés',
+          d: 'Adatok tömörítése'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q5', sec: 'sec4', num: 5,
+        q: 'Mi az alapszintű szolgáltatás egy IaaS rendszernél?',
+        opts: {
+          a: 'Operációs rendszer biztosítása',
+          b: 'Virtuális gépek biztosítása',
+          c: 'Szoftverfejlesztői eszközök biztosítása',
+          d: 'Adattárolás'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q6', sec: 'sec4', num: 6,
+        q: 'Melyik az Amazon felhőalapú tárolási szolgáltatása?',
+        opts: { a: 'Amazon EC2', b: 'Amazon S3', c: 'Amazon Lambda', d: 'Amazon SNS' },
+        ans: 'b'
+      },
+      {
+        id: 's4_q7', sec: 'sec4', num: 7,
+        q: 'Miért előnyös a skálázhatóság a felhőben?',
+        opts: {
+          a: 'Csak kis cégek számára elérhető',
+          b: 'A szolgáltatás díja hosszú távra állandóvá válik',
+          c: 'Költséghatékonyan növelhető kapacitás',
+          d: 'Lehetővé teszti több virtuális gép futtatását'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's4_q8', sec: 'sec4', num: 8,
+        q: 'Melyik szolgáltatás biztosít gépi tanulási képességeket a Google Cloud Platformon?',
+        opts: { a: 'Google Drive', b: 'Google AI Platform', c: 'Google Search', d: 'Google Maps' },
+        ans: 'b'
+      },
+      {
+        id: 's4_q9', sec: 'sec4', num: 9,
+        q: 'Mi a DevOps szerepe a felhőszolgáltatásokban?',
+        opts: {
+          a: 'Hardverek karbantartása',
+          b: 'Szoftverek gyors és folyamatos szállítása',
+          c: 'Biztonsági mentés',
+          d: 'Hálózati konfigurációk beállítása'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q10', sec: 'sec4', num: 10,
+        q: 'Melyik jellemző az alábbiak közül a privát felhőre?',
+        opts: {
+          a: 'Alacsonyabb adatbiztonság',
+          b: 'Csak internetkapcsolaton keresztül elérhető',
+          c: 'Nagyobb ellenőrzés az adatok felett',
+          d: 'Csak adattárolásra alkalmas'
+        },
+        ans: 'c'
+      },
+      {
+        id: 's4_q11', sec: 'sec4', num: 11,
+        q: 'Mi az "on-premises" környezet?',
+        opts: {
+          a: 'Nyilvános adatközpont',
+          b: 'A vállalat saját adatközpontja',
+          c: 'Felhőalapú infrastruktúra',
+          d: 'Hálózatok teljes hiánya'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q12', sec: 'sec4', num: 12,
+        q: 'Mi az Azure Active Directory (AAD)?',
+        opts: {
+          a: 'Az Azure biztonsági mentési szolgáltatása',
+          b: 'Az Azure felhasználó- és identitáskezelő szolgáltatása',
+          c: 'Az Azure adattárolási szolgáltatása',
+          d: 'Az Azure hálózatkezelési szolgáltatása'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q13', sec: 'sec4', num: 13,
+        q: 'Melyik operációs rendszert használhatjuk Azure virtuális gépeken?',
+        opts: { a: 'Windows', b: 'Linux', c: 'Mindkettőt', d: 'Egyiket sem' },
+        ans: 'c'
+      },
+      {
+        id: 's4_q14', sec: 'sec4', num: 14,
+        q: 'Melyik régióban NEM érdemes VM-et létrehozni, ha alacsony késleltetés a cél?',
+        opts: {
+          a: 'A felhasználóhoz közel eső régióban',
+          b: 'Egy másik kontinensen lévő régióban',
+          c: 'Ugyanazon az országon belül',
+          d: 'Ugyanazon az adatközponton belül'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q15', sec: 'sec4', num: 15,
+        q: 'Melyik szintű lemezt válasszuk, ha kiemelten fontos a teljesítmény az Azure VM-ek esetén?',
+        opts: { a: 'Standard HDD', b: 'Standard SSD', c: 'Premium SSD', d: 'Archív tároló' },
+        ans: 'c'
+      },
+      {
+        id: 's4_q16', sec: 'sec4', num: 16,
+        q: 'Mi történik, ha leállítunk egy Azure VM-et, de nem töröljük?',
+        opts: {
+          a: 'Teljesen ingyenessé válik',
+          b: 'Csak a tárolási költségek maradnak meg',
+          c: 'Nem lesz elérhető, de továbbra is fizetni kell a futásért',
+          d: 'Az összes adat elveszik'
+        },
+        ans: 'b'
+      },
+      {
+        id: 's4_q17', sec: 'sec4', num: 17,
+        q: 'Válassza ki az alábbiak közül, melyik felhőalapú adattároló szolgáltatás?',
+        opts: { a: 'SQL Server', b: 'Dropbox', c: 'SAP ERP', d: 'Microsoft Word' },
+        ans: 'b'
+      },
+      {
+        id: 's4_q18', sec: 'sec4', num: 18,
+        q: 'Melyik cég kínálja az Azure felhőszolgáltatást?',
+        opts: { a: 'Amazon', b: 'Google', c: 'Microsoft', d: 'IBM' },
+        ans: 'c'
+      },
+      {
+        id: 's4_q19', sec: 'sec4', num: 19,
+        q: 'Melyik szolgáltatás típusa az Office 365?',
+        opts: { a: 'IaaS', b: 'PaaS', c: 'SaaS', d: 'DaaS' },
+        ans: 'c'
+      },
+      {
+        id: 's4_q20', sec: 'sec4', num: 20,
+        q: 'Mi a felhőszolgáltatások egyik fő hátránya?',
+        opts: {
+          a: 'Nincs biztonsági mentés az adatokról',
+          b: 'Biztonsági és adatvédelmi kockázatok',
+          c: 'Nem skálázható',
+          d: 'Nem érthető el mindig'
+        },
+        ans: 'b'
+      }
+    ];
+
+    // =========================================================================
+    // STATE & SCORING HELPERS
+    // =========================================================================
+    const STORAGE_KEY = 'osztv_2025_state_v1';
+    let userAnswers = {}; // For single: 'a', for multi: ['a', 'c']
+    let isGraded = false;
+    let activeSection = 'all';
+    let resultFilter = 'all';
+    let timerSeconds = 180 * 60;
+    let timerInterval = null;
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function isQuestionAnswered(q) {
+      const val = userAnswers[q.id];
+      if (q.multi) {
+        return Array.isArray(val) && val.length > 0;
+      }
+      return Boolean(val);
+    }
+
+    function evaluateQuestion(q) {
+      const maxPts = q.points || 2;
+      const val = userAnswers[q.id];
+
+      if (!isQuestionAnswered(q)) {
+        return { earned: 0, max: maxPts, status: 'skipped' };
+      }
+
+      if (q.multi) {
+        const picked = Array.isArray(val) ? val : [];
+        const correctSet = new Set(q.ans);
+        let rightPicked = 0;
+        let wrongPicked = 0;
+
+        picked.forEach(k => {
+          if (correctSet.has(k)) rightPicked++;
+          else wrongPicked++;
+        });
+
+        const earned = Math.max(0, rightPicked * 2 - wrongPicked * 2);
+        if (earned === maxPts) return { earned, max: maxPts, status: 'correct' };
+        if (earned > 0) return { earned, max: maxPts, status: 'partial' };
+        return { earned: 0, max: maxPts, status: 'wrong' };
+      } else {
+        if (val === q.ans) {
+          return { earned: maxPts, max: maxPts, status: 'correct' };
+        }
+        return { earned: 0, max: maxPts, status: 'wrong' };
+      }
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed.userAnswers && typeof parsed.userAnswers === 'object') {
+          userAnswers = parsed.userAnswers;
+        }
+        if (typeof parsed.code1 === 'string') {
+          document.getElementById('competitor-code-1').value = parsed.code1;
+        }
+        if (typeof parsed.code2 === 'string') {
+          document.getElementById('competitor-code-2').value = parsed.code2;
+        }
+        if (typeof parsed.isGraded === 'boolean') {
+          isGraded = parsed.isGraded;
+        }
+        if (typeof parsed.timerSeconds === 'number' && parsed.timerSeconds > 0) {
+          timerSeconds = parsed.timerSeconds;
+          updateTimerDisplay();
+        }
+      } catch (e) {
+        console.warn('Could not load saved state:', e);
+      }
+    }
+
+    function saveState() {
+      try {
+        const code1 = document.getElementById('competitor-code-1')?.value || '';
+        const code2 = document.getElementById('competitor-code-2')?.value || '';
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            userAnswers,
+            code1,
+            code2,
+            isGraded,
+            timerSeconds
+          })
+        );
+      } catch (e) {
+        console.warn('Could not save state:', e);
+      }
+    }
+
+    // =========================================================================
+    // INTERACTION & RENDERING
+    // =========================================================================
+    function selectOption(qId, optKey) {
+      if (isGraded) return;
+      const q = QUESTIONS.find(item => item.id === qId);
+      if (!q) return;
+
+      if (q.multi) {
+        const prev = Array.isArray(userAnswers[qId]) ? [...userAnswers[qId]] : [];
+        const idx = prev.indexOf(optKey);
+        if (idx >= 0) {
+          prev.splice(idx, 1);
+        } else {
+          prev.push(optKey);
+        }
+        if (prev.length === 0) {
+          delete userAnswers[qId];
+        } else {
+          userAnswers[qId] = prev;
+        }
+      } else {
+        userAnswers[qId] = optKey;
+      }
+
+      saveState();
+      updateProgressUI();
+      renderQuestions();
+    }
+
+    function clearOption(qId, event) {
+      if (event) event.stopPropagation();
+      if (isGraded) return;
+      delete userAnswers[qId];
+      saveState();
+      updateProgressUI();
+      renderQuestions();
+    }
+
+    function renderDialogIllustration() {
+      return `
+        <div class="my-3 max-w-md bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg shadow-xs overflow-hidden font-sans text-xs select-none">
+          <div class="bg-white dark:bg-slate-800 px-3 py-1.5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+            <span class="font-semibold text-slate-700 dark:text-slate-200">Computer Name/Domain Changes</span>
+            <span class="text-slate-400 font-bold">✕</span>
+          </div>
+          <div class="p-4 flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+              ✕
+            </div>
+            <div class="space-y-2 text-slate-800 dark:text-slate-200 flex-1">
+              <p>An Active Directory Domain Controller (AD DC) for the domain <span class="bg-slate-300 dark:bg-slate-700 px-2 rounded text-transparent select-none">domain.local</span> could not be contacted.</p>
+              <p>Ensure that the domain name is typed correctly.</p>
+              <p class="text-slate-600 dark:text-slate-400">If the name is correct, click Details for troubleshooting information.</p>
+            </div>
+            <div class="flex flex-col gap-1.5 shrink-0">
+              <span class="px-4 py-1 border border-slate-400 dark:border-slate-600 bg-white dark:bg-slate-800 rounded text-center font-medium">OK</span>
+              <span class="px-2.5 py-1 border border-slate-400 dark:border-slate-600 bg-white dark:bg-slate-800 rounded text-center">&lt;&lt; Details</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questions-container');
+      const searchQuery = (document.getElementById('search-input')?.value || '').trim().toLowerCase();
+      const onlyUnanswered = document.getElementById('only-unanswered')?.checked;
+
+      let html = '';
+      let totalRendered = 0;
+
+      SECTIONS.forEach(sec => {
+        if (activeSection !== 'all' && activeSection !== sec.id) return;
+
+        const secQuestions = QUESTIONS.filter(q => {
+          if (q.sec !== sec.id) return false;
+          if (onlyUnanswered && isQuestionAnswered(q)) return false;
+
+          if (isGraded && resultFilter !== 'all') {
+            const ev = evaluateQuestion(q);
+            if (resultFilter === 'mistakes' && ev.status === 'correct') return false;
+            if (resultFilter === 'wrong' && ev.status !== 'wrong' && ev.status !== 'partial') return false;
+            if (resultFilter === 'correct' && ev.status !== 'correct') return false;
+          }
+
+          if (searchQuery) {
+            const inQuestion = q.q.toLowerCase().includes(searchQuery);
+            const inOpts = Object.values(q.opts).some(v => v.toLowerCase().includes(searchQuery));
+            const inNum = `${q.num}.`.includes(searchQuery);
+            if (!inQuestion && !inOpts && !inNum) return false;
+          }
+          return true;
+        });
+
+        if (secQuestions.length === 0) return;
+
+        html += `
+          <div class="space-y-4">
+            <div class="bg-slate-900 dark:bg-slate-800 text-white rounded-2xl p-5 shadow-sm border border-slate-800 dark:border-slate-700">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h3 class="text-base sm:text-lg font-bold">${escapeHtml(sec.title)}</h3>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white">${sec.maxPoints} pont</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-1">${escapeHtml(sec.description)}</p>
+            </div>
+        `;
+
+        let lastSub = null;
+        secQuestions.forEach(q => {
+          totalRendered++;
+          if (q.sub && q.sub !== lastSub) {
+            lastSub = q.sub;
+            html += `
+              <div class="pt-2 pb-1">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                  💻 ${escapeHtml(q.sub)}
+                </span>
+              </div>
+            `;
+          }
+
+          const maxPts = q.points || 2;
+          const answered = isQuestionAnswered(q);
+          const ev = evaluateQuestion(q);
+
+          let cardBorder = 'border-slate-200 dark:border-slate-700';
+          let statusBadge = `<span class="text-xs font-semibold ${q.multi ? 'px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300' : 'text-slate-500 dark:text-slate-400'}">${maxPts} pont${q.multi ? ' (2 válasz)' : ''}</span>`;
+
+          if (isGraded) {
+            if (ev.status === 'correct') {
+              cardBorder = 'border-emerald-500/80 dark:border-emerald-500/70';
+              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">✓ ${ev.earned} / ${ev.max} pont (Helyes)</span>`;
+            } else if (ev.status === 'partial') {
+              cardBorder = 'border-amber-500/80 dark:border-amber-500/70';
+              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300">◐ ${ev.earned} / ${ev.max} pont (Részpontszám)</span>`;
+            } else if (ev.status === 'skipped') {
+              cardBorder = 'border-amber-500/80 dark:border-amber-500/70';
+              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300">⚠ 0 / ${ev.max} pont (Kihagyott)</span>`;
+            } else {
+              cardBorder = 'border-rose-500/80 dark:border-rose-500/70';
+              statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 dark:bg-rose-950/80 dark:text-rose-300">✗ 0 / ${ev.max} pont (Hibás)</span>`;
+            }
+          }
+
+          html += `
+            <article id="card-${q.id}" class="question-card bg-white dark:bg-slate-800 border-2 ${cardBorder} rounded-2xl p-5 shadow-xs transition">
+              <div class="flex items-start justify-between gap-3 mb-3.5">
+                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 leading-snug">
+                  <span class="text-indigo-600 dark:text-indigo-400 mr-1">${q.num}.</span>
+                  ${escapeHtml(q.q)}
+                </h4>
+                <div class="flex items-center gap-2 shrink-0">
+                  <button
+                    onclick="clearOption('${q.id}', event)"
+                    title="Jelölés törlése"
+                    class="${!answered || isGraded ? 'hidden' : ''} text-xs text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 px-1.5 py-0.5 rounded no-print"
+                  >
+                    Töröl
+                  </button>
+                  ${statusBadge}
+                </div>
+              </div>
+              ${q.hasDialogIllustration ? renderDialogIllustration() : ''}
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          `;
+
+          const optKeys = Object.keys(q.opts);
+          optKeys.forEach(optKey => {
+            const optText = q.opts[optKey];
+            const displayLetter = q.optLabels && q.optLabels[optKey] ? q.optLabels[optKey] : optKey;
+
+            const isThisSelected = q.multi
+              ? Array.isArray(userAnswers[q.id]) && userAnswers[q.id].includes(optKey)
+              : userAnswers[q.id] === optKey;
+
+            const isThisCorrect = q.multi
+              ? Array.isArray(q.ans) && q.ans.includes(optKey)
+              : q.ans === optKey;
+
+            let labelClasses = 'option-label flex items-start gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/40 cursor-pointer select-none';
+            let indClasses = `w-6 h-6 ${q.multi ? 'rounded-md' : 'rounded-full'} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300`;
+            let feedbackTag = '';
+
+            if (!isGraded) {
+              if (isThisSelected) {
+                labelClasses = 'option-label flex items-start gap-3 p-3 rounded-xl border-2 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/40 dark:border-indigo-500 cursor-pointer select-none';
+                indClasses = `w-6 h-6 ${q.multi ? 'rounded-md' : 'rounded-full'} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 bg-indigo-600 text-white`;
+              }
+            } else {
+              if (isThisCorrect && isThisSelected) {
+                labelClasses = 'option-label graded-locked flex items-start gap-3 p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/40 dark:border-emerald-500 select-none';
+                indClasses = `w-6 h-6 ${q.multi ? 'rounded-md' : 'rounded-full'} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 bg-emerald-600 text-white`;
+                feedbackTag = `<span class="ml-auto text-xs font-bold text-emerald-700 dark:text-emerald-300 shrink-0">✓ Helyes</span>`;
+              } else if (isThisCorrect && !isThisSelected) {
+                labelClasses = 'option-label graded-locked flex items-start gap-3 p-3 rounded-xl border-2 border-emerald-500 bg-emerald-50/60 dark:bg-emerald-950/30 dark:border-emerald-500/80 select-none';
+                indClasses = `w-6 h-6 ${q.multi ? 'rounded-md' : 'rounded-full'} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 bg-emerald-600 text-white`;
+                feedbackTag = `<span class="ml-auto text-xs font-bold text-emerald-700 dark:text-emerald-300 shrink-0">✓ Helyes válasz</span>`;
+              } else if (isThisSelected && !isThisCorrect) {
+                labelClasses = 'option-label graded-locked flex items-start gap-3 p-3 rounded-xl border-2 border-rose-500 bg-rose-50/80 dark:bg-rose-950/40 dark:border-rose-500 select-none';
+                indClasses = `w-6 h-6 ${q.multi ? 'rounded-md' : 'rounded-full'} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 bg-rose-600 text-white`;
+                feedbackTag = `<span class="ml-auto text-xs font-bold text-rose-700 dark:text-rose-300 shrink-0">✗ Ön jelölte</span>`;
+              } else {
+                labelClasses = 'option-label graded-locked flex items-start gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-700/70 bg-slate-50/30 dark:bg-slate-900/20 opacity-75 select-none';
+              }
+            }
+
+            html += `
+              <div
+                onclick="selectOption('${q.id}', '${optKey}')"
+                class="${labelClasses}"
+              >
+                <span class="${indClasses}">${displayLetter})</span>
+                <span class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 break-words leading-relaxed">${escapeHtml(optText)}</span>
+                ${feedbackTag}
+              </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </article>
+          `;
+        });
+
+        html += `</div>`;
+      });
+
+      if (totalRendered === 0) {
+        html = `
+          <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-10 text-center space-y-2">
+            <p class="text-base font-bold text-slate-800 dark:text-slate-200">Nincs a szűrésnek megfelelő feladat.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Próbálja módosítani a keresési kifejezést vagy a szűrőket.</p>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function updateProgressUI() {
+      const answeredCount = QUESTIONS.filter(q => isQuestionAnswered(q)).length;
+      const total = QUESTIONS.length;
+      const pct = Math.round((answeredCount / total) * 100);
+
+      document.getElementById('progress-text').textContent = `${answeredCount} / ${total} (${pct}%)`;
+      document.getElementById('progress-bar').style.width = `${pct}%`;
+
+      const remaining = total - answeredCount;
+      const bottomText = document.getElementById('bottom-status-text');
+      if (isGraded) {
+        bottomText.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-bold">✓ Feladatsor kiértékelve</span> (${answeredCount} / ${total} megválaszolva)`;
+      } else if (remaining === 0) {
+        bottomText.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400 font-bold">Minden kérdés megválaszolva (${total} / ${total})!</span> Készen áll a beküldésre.`;
+      } else {
+        bottomText.innerHTML = `Megválaszolva: <strong>${answeredCount} / ${total}</strong> kérdés <span class="text-slate-400 mx-1">|</span> Hiányzik még: <strong>${remaining} db</strong>`;
+      }
+
+      renderNavigatorGrid();
+    }
+
+    function renderNavigatorGrid() {
+      const grid = document.getElementById('navigator-grid');
+      if (!grid) return;
+
+      let html = '';
+      QUESTIONS.forEach((q, idx) => {
+        const globalNum = idx + 1;
+        const answered = isQuestionAnswered(q);
+        let btnClass = 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300';
+
+        if (!isGraded) {
+          if (answered) {
+            btnClass = 'bg-indigo-600 text-white font-bold';
+          }
+        } else {
+          const ev = evaluateQuestion(q);
+          if (ev.status === 'correct') {
+            btnClass = 'bg-emerald-600 text-white font-bold';
+          } else if (ev.status === 'partial' || ev.status === 'skipped') {
+            btnClass = 'bg-amber-500 text-white font-bold';
+          } else {
+            btnClass = 'bg-rose-600 text-white font-bold';
+          }
+        }
+
+        const secRoman = q.sec === 'sec1' ? 'I' : q.sec === 'sec2' ? 'II' : q.sec === 'sec3' ? 'III' : 'IV';
+        html += `
+          <button
+            onclick="jumpToQuestion('${q.id}', '${q.sec}')"
+            title="${secRoman}. rész ${q.num}. kérdés"
+            class="h-7 rounded text-xs font-mono transition ${btnClass}"
+          >
+            ${globalNum}
+          </button>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+
+    function jumpToQuestion(qId, secId) {
+      if (activeSection !== 'all' && activeSection !== secId) {
+        setSectionFilter('all');
+      }
+      if (document.getElementById('only-unanswered')?.checked) {
+        document.getElementById('only-unanswered').checked = false;
+        renderQuestions();
+      }
+      if (isGraded && resultFilter !== 'all') {
+        setResultFilter('all');
+      }
+      const el = document.getElementById(`card-${qId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('ring-4', 'ring-indigo-400');
+        setTimeout(() => el.classList.remove('ring-4', 'ring-indigo-400'), 1400);
+      }
+    }
+
+    function jumpToNextUnanswered() {
+      const missing = QUESTIONS.find(q => !isQuestionAnswered(q));
+      if (!missing) {
+        alert('Minden kérdésre válaszolt már! Kattintson a „Beküldés és javítás” gombra.');
+        return;
+      }
+      jumpToQuestion(missing.id, missing.sec);
+    }
+
+    function toggleNavigator() {
+      document.getElementById('navigator-drawer').classList.toggle('hidden');
+    }
+
+    function setSectionFilter(secId) {
+      activeSection = secId;
+      document.querySelectorAll('.sec-tab').forEach(btn => {
+        if (btn.getAttribute('data-sec') === secId) {
+          btn.className = 'sec-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 text-white transition';
+        } else {
+          btn.className = 'sec-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-700/70 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition';
+        }
+      });
+      renderQuestions();
+    }
+
+    function setResultFilter(rf) {
+      resultFilter = rf;
+      ['all', 'mistakes', 'wrong', 'correct'].forEach(k => {
+        const btn = document.getElementById(`rfilter-${k}`);
+        if (!btn) return;
+        if (k === rf) {
+          btn.className = 'text-xs px-3 py-1.5 rounded-lg font-semibold bg-indigo-600 text-white';
+        } else {
+          btn.className = 'text-xs px-3 py-1.5 rounded-lg font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200';
+        }
+      });
+      renderQuestions();
+    }
+
+    function submitAndGrade() {
+      const answeredCount = QUESTIONS.filter(q => isQuestionAnswered(q)).length;
+      const missingCount = QUESTIONS.length - answeredCount;
+
+      if (missingCount > 0 && !isGraded) {
+        const modal = document.getElementById('confirm-modal');
+        const text = document.getElementById('confirm-modal-text');
+        text.innerHTML = `Jelenleg <strong>${missingCount} db megválaszolatlan kérdés</strong> van a feladatsorban (kitöltve: ${answeredCount} / ${QUESTIONS.length}).<br><br>A kiértékelési szabályok alapján a kihagyott kérdésekre <strong>0 pont</strong> jár. Szeretné még pótolni a hiányzó válaszokat, vagy beküldi és kijavíttatja a feladatsort most?`;
+        modal.classList.remove('hidden');
+        return;
+      }
+
+      performGrading();
+    }
+
+    function closeConfirmModal(jumpToMissing) {
+      document.getElementById('confirm-modal').classList.add('hidden');
+      if (jumpToMissing) {
+        jumpToNextUnanswered();
+      }
+    }
+
+    function performGrading() {
+      isGraded = true;
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById('timer-toggle-btn').textContent = 'Indít';
+      }
+      saveState();
+
+      let totalPoints = 0;
+      let correctCount = 0;
+      let partialCount = 0;
+      let wrongCount = 0;
+      let skippedCount = 0;
+
+      const secStats = {};
+      SECTIONS.forEach(s => {
+        secStats[s.id] = { title: s.title, earned: 0, max: s.maxPoints, correct: 0, totalQ: 0 };
+      });
+
+      QUESTIONS.forEach(q => {
+        const ev = evaluateQuestion(q);
+        secStats[q.sec].totalQ++;
+        secStats[q.sec].earned += ev.earned;
+        totalPoints += ev.earned;
+
+        if (ev.status === 'correct') {
+          correctCount++;
+          secStats[q.sec].correct++;
+        } else if (ev.status === 'partial') {
+          partialCount++;
+        } else if (ev.status === 'skipped') {
+          skippedCount++;
+        } else {
+          wrongCount++;
+        }
+      });
+
+      const pct = Math.round((totalPoints / 300) * 100);
+      document.getElementById('score-total').textContent = `${totalPoints} / 300 pont`;
+      document.getElementById('score-percent').textContent = `(${pct}%)`;
+      document.getElementById('stat-correct').textContent = `${correctCount} db`;
+      document.getElementById('stat-wrong').textContent = `${wrongCount} db`;
+      document.getElementById('stat-skipped').textContent = `${skippedCount} db`;
+
+      const partialBox = document.getElementById('stat-partial-box');
+      if (partialCount > 0) {
+        partialBox.classList.remove('hidden');
+        document.getElementById('stat-partial').textContent = `${partialCount} db`;
+      } else {
+        partialBox.classList.add('hidden');
+      }
+
+      const c1 = (document.getElementById('competitor-code-1')?.value || '').trim();
+      const c2 = (document.getElementById('competitor-code-2')?.value || '').trim();
+      document.getElementById('result-competitor-id').textContent = (c1 || c2)
+        ? `Versenyzői kód: ${c1 || '___'} / 23 / ${c2 || '___'}`
+        : 'Versenyzői kód: (nincs megadva)';
+
+      let secHtml = '';
+      SECTIONS.forEach(s => {
+        const st = secStats[s.id];
+        const sPct = Math.round((st.earned / st.max) * 100);
+        secHtml += `
+          <div class="bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-2">
+            <div class="text-xs font-bold text-slate-700 dark:text-slate-300 line-clamp-1" title="${escapeHtml(st.title)}">
+              ${escapeHtml(st.title.replace('tesztfeladatsor - ', '').replace('tesztfeladatsor – ', ''))}
+            </div>
+            <div class="flex items-baseline justify-between">
+              <span class="text-lg font-extrabold text-indigo-600 dark:text-indigo-400">${st.earned} / ${st.max} p</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">${sPct}% (${st.correct}/${st.totalQ})</span>
+            </div>
+            <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-full bg-indigo-600 rounded-full" style="width: ${sPct}%"></div>
+            </div>
+          </div>
+        `;
+      });
+      document.getElementById('section-breakdown').innerHTML = secHtml;
+
+      document.getElementById('results-panel').classList.remove('hidden');
+      updateProgressUI();
+      renderQuestions();
+
+      document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function unlockForEditing() {
+      isGraded = false;
+      resultFilter = 'all';
+      document.getElementById('results-panel').classList.add('hidden');
+      saveState();
+      updateProgressUI();
+      renderQuestions();
+    }
+
+    function resetQuiz() {
+      if (!confirm('Biztosan törölni szeretné az összes eddig megjelölt választ és újrakezdi a 2025-ös feladatsort?')) {
+        return;
+      }
+      userAnswers = {};
+      isGraded = false;
+      resultFilter = 'all';
+      document.getElementById('results-panel').classList.add('hidden');
+      document.getElementById('only-unanswered').checked = false;
+      saveState();
+      updateProgressUI();
+      renderQuestions();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60);
+      const secs = timerSeconds % 60;
+      document.getElementById('timer-display').textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('timer-toggle-btn');
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.textContent = 'Folytat';
+        saveState();
+      } else {
+        btn.textContent = 'Szünet';
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerDisplay();
+            if (timerSeconds % 10 === 0) saveState();
+          } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            btn.textContent = 'Lejárt';
+            alert('Lejárt a 180 perces versenyidő! A feladatsor most kiértékelésre kerül.');
+            performGrading();
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      timerSeconds = 180 * 60;
+      document.getElementById('timer-toggle-btn').textContent = 'Indít';
+      updateTimerDisplay();
+      saveState();
+    }
+
+    function toggleDarkMode() {
+      const htmlEl = document.documentElement;
+      const isDark = htmlEl.classList.toggle('dark');
+      document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      updateProgressUI();
+      if (isGraded) {
+        performGrading();
+      } else {
+        renderQuestions();
+      }
+    });
+  </script>
+</body>
+</html>
