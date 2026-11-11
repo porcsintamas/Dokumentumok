@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,15 +7,7 @@
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {
-      --bg-page: #f8fafc;
-      --bg-card: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --border-color: #e2e8f0;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-    }
-    html.dark {
+      color-scheme: dark;
       --bg-page: #0f172a;
       --bg-card: #1e293b;
       --text-main: #f8fafc;
@@ -33,8 +25,8 @@
       transition: all 0.15s ease-in-out;
     }
     .option-label:hover:not(.graded-locked) {
-      border-color: #3b82f6;
-      background-color: rgba(59, 130, 246, 0.05);
+      border-color: #6366f1;
+      background-color: rgba(99, 102, 241, 0.08);
     }
     @media print {
       .no-print {
@@ -53,25 +45,33 @@
     }
   </style>
 </head>
-<body class="min-h-screen antialiased pb-24">
+<body class="min-h-screen bg-slate-900 text-slate-100 antialiased pb-24">
 
   <!-- Top Sticky Navigation & Status Bar -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800 shadow-sm no-print">
+  <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800 shadow-sm no-print">
     <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
           2025
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <h1 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-tight">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="font-bold text-sm sm:text-base text-slate-100 leading-tight">
               OSZTV 2025 – Területi előválogató
             </h1>
-            <a href="index.html" class="text-xs px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:underline font-medium border border-slate-200 dark:border-slate-700">
-              Átváltás a 2026-os feladatsorra →
-            </a>
+            <div class="flex items-center gap-1.5">
+              <a href="index.html" class="text-xs px-2 py-0.5 rounded-md bg-slate-800 text-blue-400 hover:bg-slate-700 font-medium border border-slate-700 transition">
+                2026
+              </a>
+              <span class="text-xs px-2 py-0.5 rounded-md bg-indigo-600 text-white font-bold">
+                2025
+              </span>
+              <a href="osztv_2024.html" class="text-xs px-2 py-0.5 rounded-md bg-slate-800 text-teal-400 hover:bg-slate-700 font-medium border border-slate-700 transition">
+                2024
+              </a>
+            </div>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">
+          <p class="text-xs text-slate-400">
             5 0612 12 02 Informatikai rendszer- és alkalmazás-üzemeltető technikus
           </p>
         </div>
@@ -82,39 +82,34 @@
         <!-- Answered Counter -->
         <div class="flex flex-col min-w-[140px]">
           <div class="flex justify-between text-xs font-medium mb-1">
-            <span class="text-slate-600 dark:text-slate-300">Kitöltve:</span>
-            <span id="progress-text" class="font-bold text-indigo-600 dark:text-indigo-400">0 / 148 (0%)</span>
+            <span class="text-slate-300">Kitöltve:</span>
+            <span id="progress-text" class="font-bold text-indigo-400">0 / 148 (0%)</span>
           </div>
-          <div class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+          <div class="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
             <div id="progress-bar" class="h-full bg-indigo-600 transition-all duration-300" style="width: 0%"></div>
           </div>
         </div>
 
         <!-- Timer -->
-        <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5">
-          <svg class="w-4 h-4 text-slate-500 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center gap-1.5 bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-          <span id="timer-display" class="font-mono text-sm font-bold text-slate-800 dark:text-slate-200">180:00</span>
+          <span id="timer-display" class="font-mono text-sm font-bold text-slate-200">180:00</span>
           <button id="timer-toggle-btn" onclick="toggleTimer()" title="Időmérő indítása / szüneteltetése" class="ml-1 text-xs px-2 py-0.5 rounded bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition">
             Indít
           </button>
-          <button onclick="resetTimer()" title="Időmérő visszaállítása (180 perc)" class="text-xs px-1.5 py-0.5 rounded text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
+          <button onclick="resetTimer()" title="Időmérő visszaállítása (180 perc)" class="text-xs px-1.5 py-0.5 rounded text-slate-400 hover:text-slate-200">
             ↺
           </button>
         </div>
 
         <!-- Question Map Toggle -->
-        <button onclick="toggleNavigator()" class="text-xs font-medium px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition">
+        <button onclick="toggleNavigator()" class="text-xs font-medium px-3 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-200 flex items-center gap-1.5 transition">
           <span>Kérdéstérkép</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
-        </button>
-
-        <!-- Theme Toggle -->
-        <button onclick="toggleDarkMode()" title="Sötét / Világos mód" class="p-2 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition">
-          <span id="theme-icon">🌙</span>
         </button>
       </div>
     </div>
@@ -2381,12 +2376,6 @@
       document.getElementById('timer-toggle-btn').textContent = 'Indít';
       updateTimerDisplay();
       saveState();
-    }
-
-    function toggleDarkMode() {
-      const htmlEl = document.documentElement;
-      const isDark = htmlEl.classList.toggle('dark');
-      document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
     }
 
     window.addEventListener('DOMContentLoaded', () => {
